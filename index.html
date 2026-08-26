@@ -674,9 +674,16 @@
     <h1 class="page-title">Three-Dimensional Coordinate Systems</h1>
     <p class="lede">Everything in Calc III lives in space instead of on a plane, so the first job is just getting comfortable with a third axis.</p>
 
-    <p>To locate a point in space we use three mutually perpendicular axes — <em class="term">x</em>, <em class="term">y</em>, and <em class="term">z</em> — meeting at the origin <strong>O</strong>. A point is written <strong>P(a, b, c)</strong>, found by moving <em>a</em> units along x, <em>b</em> along y, and <em>c</em> along z. Stewart's textbook uses a <strong>right-handed</strong> coordinate system: curl the fingers of your right hand from the positive x-axis toward the positive y-axis, and your thumb points along the positive z-axis.</p>
+    <p>To locate a point in space we use three mutually perpendicular axes — <em class="term">x</em>, <em class="term">y</em>, and <em class="term">z</em> — meeting at the origin <strong>O</strong>. A point is written <strong>P(a, b, c)</strong>, found by moving <em>a</em> units along x, <em>b</em> along y, and <em>c</em> along z. Stewart's textbook uses a <strong>right-handed</strong> coordinate system: curl the fingers of your right hand from the positive x-axis toward the positive y-axis, and your thumb points along the positive z-axis. If you used your left hand instead you'd get a mirror-image (left-handed) system — the convention matters later for cross products and orientation, so it's worth building the right-hand habit now.</p>
 
-    <p>The three coordinate axes determine three <em class="term">coordinate planes</em>: the xy-plane (z = 0), the yz-plane (x = 0), and the xz-plane (y = 0). These divide space into eight <em class="term">octants</em>, the first of which is where x, y, z are all positive.</p>
+    <p>The three coordinate axes determine three <em class="term">coordinate planes</em>: the xy-plane (z = 0), the yz-plane (x = 0), and the xz-plane (y = 0). These divide space into eight <em class="term">octants</em>, the first of which is where x, y, z are all positive — the 3D analogue of "Quadrant I." A useful mental model: imagine standing in the corner of a room where the floor and two walls meet. The floor is the xy-plane, and the two walls are the xz- and yz-planes; the corner itself is the origin.</p>
+
+    <p>Two things trip people up early in this section. First, <strong>every equation you write in ℝ³ describes a region of space, not just a set of numbers</strong> — an equation like x = 5 doesn't mean "one point," it means "every point where x is 5, no matter what y and z are," which is an entire plane parallel to the yz-plane. Second, projections: the projection of a point P(a,b,c) onto the xy-plane is (a,b,0) — you literally set the missing coordinate to zero and keep the other two. This idea of projecting onto a plane by dropping a coordinate comes back constantly in Chapter 15 when you set up bounds for double and triple integrals.</p>
+
+    <div class="callout note">
+      <div class="callout-title">Reading coordinate-plane and coordinate-axis equations</div>
+      <strong>x = k</strong> is a plane parallel to the yz-plane. <strong>y = k</strong> is a plane parallel to the xz-plane. <strong>z = k</strong> is a plane parallel to the xy-plane. If <em>two</em> variables are fixed (like x=2, y=3 together) you get a line parallel to the z-axis. This "one equation removes one degree of freedom" idea is the same logic used later for cylinders in 12.6.
+    </div>
 
     <h3 class="subhead">Distance and spheres</h3>
     <div class="formula-box">
@@ -688,6 +695,10 @@
       <div class="fmath">(x − h)² + (y − k)² + (z − l)² = r²</div>
       <div class="fnote">Center (h, k, l), radius r — the 3D analogue of a circle. If you expand a quadratic equation in x, y, z and it doesn't obviously match this form, complete the square in each variable to find the center and radius.</div>
     </div>
+
+    <p>Where does the sphere equation come from? A sphere is, by definition, the set of every point whose distance from a fixed center (h,k,l) equals a fixed radius r. So you literally start from the distance formula, |P − center| = r, and square both sides to clear the square root — that's the entire derivation. This is the same pattern you'll see over and over in this course: a geometric definition (all points satisfying some distance/angle condition) turns directly into an algebraic equation.</p>
+
+    <p><strong>Completing the square, step by step:</strong> if you're given something like x² + bx, you want to turn it into (x + b/2)² by adding and subtracting (b/2)². The two-line habit that keeps this error-free: (1) take half the coefficient on the linear term, square it; (2) add that number inside the group, and immediately subtract the same number outside (or add it to the other side) so the equation stays balanced. Do this once for each of x, y, z separately — the terms don't interact with each other.</p>
 
     <div class="example">
       <div class="ex-label">Worked Example</div>
@@ -720,6 +731,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">(x−1)² + y² + (z+3)² = −1 + 1 + 9 = 9. <span class="final">Center (1, 0, −3), radius 3</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Describe in words the region given by 1 ≤ x² + y² + z² ≤ 4.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">This is the set of points whose distance from the origin is between 1 and 2 (since √1=1 and √4=2). <span class="final">The solid region between two concentric spheres of radius 1 and 2 (a spherical shell), including both boundary spheres</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find an equation of the sphere that passes through the origin and has center (1, 2, 3).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Radius = distance from (1,2,3) to (0,0,0) = √(1+4+9) = √14. <span class="final">(x−1)² + (y−2)² + (z−3)² = 14</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -733,7 +754,11 @@
     <h1 class="page-title">Vectors</h1>
     <p class="lede">A vector carries both magnitude and direction — think displacement, velocity, or force, as opposed to a plain number.</p>
 
-    <p>Geometrically, a vector is a directed line segment; two segments represent the <em>same</em> vector if they have the same length and direction, regardless of where they're drawn. Algebraically, we place a vector's tail at the origin and record its tip's coordinates: <strong>a</strong> = ⟨a₁, a₂, a₃⟩. If A(x₁,y₁,z₁) and B(x₂,y₂,z₂) are any two points, the vector from A to B has components ⟨x₂−x₁, y₂−y₁, z₂−z₁⟩.</p>
+    <p>Geometrically, a vector is a directed line segment; two segments represent the <em>same</em> vector if they have the same length and direction, regardless of where they're drawn. This "free-floating" property — a vector doesn't care where it starts, only how far and which way it points — is the single biggest conceptual difference between a vector and a point, and it's what makes vectors so useful: you can slide the exact same displacement vector all over a diagram without changing what it represents.</p>
+
+    <p>Algebraically, we place a vector's tail at the origin and record its tip's coordinates: <strong>a</strong> = ⟨a₁, a₂, a₃⟩. This particular placement (tail at the origin) is called the <em class="term">position vector</em> — it's the "standard" representative of a whole equivalence class of directed segments that all share the same length and direction. If A(x₁,y₁,z₁) and B(x₂,y₂,z₂) are any two points, the vector from A to B has components ⟨x₂−x₁, y₂−y₁, z₂−z₁⟩ — you're finding "how far you'd have to walk in each direction" to get from A to B, which is exactly tip-minus-tail, or terminal-point-minus-initial-point. Getting this order right (terminal minus initial, not the other way around) is one of the most common sources of sign errors in this chapter.</p>
+
+    <p>It helps to keep two mental pictures side by side: the <strong>Triangle Law</strong> (place the tail of the second vector at the tip of the first; the sum runs from the start of the first to the end of the second) and the <strong>Parallelogram Law</strong> (place both vectors' tails at the same point; the sum is the diagonal of the parallelogram they form). They describe the same operation — pick whichever picture makes a given problem easier to visualize.</p>
 
     <h3 class="subhead">Operations</h3>
     <div class="formula-grid">
@@ -756,6 +781,10 @@
         <div class="fnote">Divide by the magnitude to get a vector of length 1 pointing the same way.</div>
       </div>
     </div>
+
+    <p>Why does dividing by |a| always produce a length-1 vector? Because scalar multiplication scales the length by exactly the factor you multiply by: |ca| = |c||a|. So if you multiply a by the scalar 1/|a|, the new length is (1/|a|)·|a| = 1, no matter what direction a originally pointed. This little fact is used constantly for the rest of the course — anytime you need "a vector of length 1 pointing this way," you build it by dividing that vector by its own magnitude.</p>
+
+    <p>It's worth pausing on why the eight algebraic properties listed above (commutativity, associativity, distributivity, etc.) matter: they're exactly the properties that let you manipulate vector expressions the same way you manipulate ordinary algebra — combining like terms, factoring out scalars, and so on — as long as you never try to "divide by a vector" or multiply two vectors together carelessly (dot and cross products, coming in 12.3 and 12.4, have their own special rules).</p>
 
     <div class="example">
       <div class="ex-label">Worked Example</div>
@@ -789,6 +818,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">a = 5i − j + 2k. |a| = √(25+1+4) = √30. <span class="final">5i − j + 2k, |a| = √30</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find a vector of length 6 in the same direction as v = ⟨1, 2, 2⟩.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">|v| = √(1+4+4) = 3. Unit vector v̂ = ⟨1/3, 2/3, 2/3⟩. Scale to length 6: multiply v̂ by 6 (equivalently, multiply v by 6/3 = 2). <span class="final">6v̂ = ⟨2, 4, 4⟩</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> A force of magnitude 10 N acts in the direction of the vector ⟨3, 4⟩ (2D). Write this force as a vector.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">|⟨3,4⟩| = 5. Unit direction = ⟨3/5, 4/5⟩. Scale to magnitude 10. <span class="final">F = 10⟨3/5, 4/5⟩ = ⟨6, 8⟩</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -801,6 +840,10 @@
     <div class="section-eyebrow"><span class="num-badge">12.3</span> Chapter 12 · Vectors &amp; the Geometry of Space</div>
     <h1 class="page-title">The Dot Product</h1>
     <p class="lede">The dot product turns two vectors into a single number that measures how much they point the same way — it's the key to angles, projections, and (later) work.</p>
+
+    <p>Notice something important: the dot product takes two <em>vectors</em> and returns a plain <em>number</em> (a scalar) — this is why it's also called the <em class="term">scalar product</em>. That's fundamentally different from the cross product you'll meet next, which takes two vectors and returns another vector. Keeping "dot → number" and "cross → vector" straight from day one will save you from a lot of confused answers later, especially once both operations start appearing in the same problem (as they do in 12.4's scalar triple product, and constantly throughout Chapter 16).</p>
+
+    <p>The two formulas — the algebraic one (multiply matching components, add them up) and the geometric one (|a||b|cos θ) — describe the exact same number; Stewart's text proves this using the Law of Cosines on the triangle formed by a, b, and a−b. That's worth remembering as a proof technique in its own right, since the same triangle trick reappears in a few other derivations. In practice, you'll use the <strong>algebraic</strong> formula whenever you're handed components, and the <strong>geometric</strong> formula (solved for cos θ) whenever you need to extract an angle.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -823,7 +866,9 @@
       </div>
     </div>
 
-    <p><em class="term">Direction angles</em> α, β, γ are the angles a vector makes with the positive x, y, z axes; cos α = a₁/|a|, and similarly for β, γ. These direction cosines satisfy cos²α + cos²β + cos²γ = 1.</p>
+    <p><em class="term">Direction angles</em> α, β, γ are the angles a vector makes with the positive x, y, z axes; cos α = a₁/|a|, and similarly for β, γ. These come directly from the geometric dot-product formula applied to a and each standard basis vector: a · i = |a||i| cos α = |a| cos α, but a · i is also just a₁ by the algebraic formula — set those equal and solve for cos α. These direction cosines satisfy cos²α + cos²β + cos²γ = 1 (this is really just |a|² = a₁²+a₂²+a₃² in disguise, divided through by |a|²).</p>
+
+    <p>The projection formulas deserve a closer look because the two versions (scalar vs. vector) are easy to mix up. Picture shining a flashlight straight down onto vector a from directly above b — the "shadow" b casts onto the line through a is the projection. <strong>comp<sub>a</sub>b</strong> is just the signed length of that shadow (positive if the shadow points the same way as a, negative if it points backward). <strong>proj<sub>a</sub>b</strong> takes that same shadow and expresses it as an actual vector lying along a — you get it by taking the unit vector â = a/|a| and scaling it by comp<sub>a</sub>b: proj<sub>a</sub>b = (comp<sub>a</sub>b) â.</p>
 
     <div class="example">
       <div class="ex-label">Worked Example</div>
@@ -838,6 +883,14 @@
     <div class="callout tip">
       <div class="callout-title">comp vs. proj</div>
       comp<sub>a</sub>b is just a <strong>number</strong> (can be negative if the angle is obtuse). proj<sub>a</sub>b is a <strong>vector</strong> — multiply comp<sub>a</sub>b by the unit vector â to get it: proj<sub>a</sub>b = (comp<sub>a</sub>b) â.
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Work as a dot product</div>
+      <div class="ex-prompt">A constant force F = ⟨2, 3, 1⟩ (in Newtons) moves an object along the straight-line displacement D = ⟨4, 0, 3⟩ (in meters). Find the work done.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Physically, work is force times distance <em>in the direction of motion</em> — exactly what the dot product computes: <div class="step-math">W = F · D</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Compute the dot product directly: <div class="step-math">W = (2)(4) + (3)(0) + (1)(3) = 8 + 0 + 3</div></div></div>
+      <div class="ex-answer">W = 11 joules. (This is exactly why the dot product is defined the way it is — |F||D|cosθ is "the part of the force that actually pushes along the direction of travel," times the distance traveled.)</div>
     </div>
 
     <h3 class="subhead">Practice</h3>
@@ -857,6 +910,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">Dot = 1, |each| = √2. cos θ = 1/2, so θ = π/3. <span class="final">θ = 60° = π/3</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find comp<sub>a</sub>b and proj<sub>a</sub>b for a = ⟨3, 0, 4⟩, b = ⟨1, 2, 2⟩.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">a·b = 3+0+8=11, |a|=5. comp<sub>a</sub>b = 11/5. proj<sub>a</sub>b = (11/25)⟨3,0,4⟩. <span class="final">comp = 11/5; proj = ⟨33/25, 0, 44/25⟩</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find the direction angles (α, β, γ) of a = ⟨1, 1, 1⟩, and verify cos²α+cos²β+cos²γ=1.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">|a|=√3. cosα=cosβ=cosγ=1/√3, so α=β=γ=cos⁻¹(1/√3)≈54.7°. Check: 3(1/3)=1 ✓. <span class="final">All three angles ≈ 54.7°</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -869,6 +932,10 @@
     <div class="section-eyebrow"><span class="num-badge">12.4</span> Chapter 12 · Vectors &amp; the Geometry of Space</div>
     <h1 class="page-title">The Cross Product</h1>
     <p class="lede">Unlike the dot product, the cross product of two vectors in ℝ³ produces a <em>vector</em> — one that's perpendicular to both.</p>
+
+    <p>The cross product only makes sense in three dimensions (this is different from the dot product, which is perfectly well defined in any number of dimensions). Given two vectors a and b that aren't parallel, there are exactly two directions perpendicular to both of them — straight "up" out of the plane they span, or straight "down." The <strong>right-hand rule</strong> resolves this ambiguity: point the fingers of your right hand along a, curl them toward b, and your thumb points in the direction of a × b.</p>
+
+    <p>The determinant formula looks intimidating the first time you see it, but it's really just a bookkeeping device — expanding a symbolic 3×3 determinant along the top row automatically produces the correct component formula with the correct signs. Watch the alternating signs carefully: the coefficient of j comes with a minus sign in front of it, which is where most students lose points.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -889,8 +956,10 @@
 
     <div class="callout warn">
       <div class="callout-title">Order matters</div>
-      The cross product is <strong>anti-commutative</strong>: b × a = −(a × b). Flipping the order reverses the direction of the result. It is also <strong>not associative</strong>.
+      The cross product is <strong>anti-commutative</strong>: b × a = −(a × b). Flipping the order reverses the direction of the result. It is also <strong>not associative</strong>: (a×b)×c generally does not equal a×(b×c).
     </div>
+
+    <p>Why does |a × b| equal the parallelogram's area? Recall from geometry that a parallelogram's area is base × height. If you treat a as the base (length |a|) and drop a perpendicular from the tip of b down to the line through a, that perpendicular height works out to |b| sin θ (basic right-triangle trig, where θ is the angle between a and b). Multiply base times height: |a| · |b| sin θ — which is exactly the geometric formula for |a × b|. The scalar triple product a · (b × c) extends this one dimension further: it gives the (signed) <strong>volume</strong> of the parallelepiped (a 3D "slanted box") with edges a, b, c. You'll use this to test whether three vectors are coplanar — if a · (b × c) = 0, the parallelepiped is flat, so the three vectors all lie in the same plane.</p>
 
     <div class="example">
       <div class="ex-label">Worked Example</div>
@@ -900,6 +969,14 @@
       <div class="ex-step"><span class="step-n">3</span><div class="step-body">k-component: <div class="step-math">(1)(7) − (3)(2) = 7 − 6 = 1</div></div></div>
       <div class="ex-step"><span class="step-n">4</span><div class="step-body">So a × b = ⟨−43, 13, 1⟩. Area = |a × b|: <div class="step-math">√(43² + 13² + 1²) = √(1849+169+1) = √2019</div></div></div>
       <div class="ex-answer">a × b = ⟨−43, 13, 1⟩, Area = √2019 ≈ 44.9</div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Scalar triple product</div>
+      <div class="ex-prompt">Find the volume of the parallelepiped with edges a=⟨1,0,0⟩, b=⟨0,2,0⟩, c=⟨1,1,3⟩, using a·(b×c).</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">First find b × c. i: (2)(3)−(0)(1)=6. j: −[(0)(3)−(0)(1)]=0. k: (0)(1)−(2)(1)=−2: <div class="step-math">b × c = ⟨6, 0, −2⟩</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Dot with a: <div class="step-math">a·(b×c) = (1)(6)+(0)(0)+(0)(−2) = 6</div></div></div>
+      <div class="ex-answer">Volume = |6| = 6 (already positive here, but volume is always the absolute value of the scalar triple product)</div>
     </div>
 
     <h3 class="subhead">Practice</h3>
@@ -919,6 +996,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">PQ = ⟨−1,2,0⟩, PR = ⟨−1,0,3⟩. PQ×PR = ⟨(2)(3)−0, −[(−1)(3)−0], 0−(−2)⟩ = ⟨6,3,2⟩. |·| = 7. Triangle area = 7/2. <span class="final">7/2</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Verify that a = ⟨1,2,3⟩, b = ⟨0,1,2⟩, c = ⟨2,3,4⟩ are coplanar using the scalar triple product.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">b×c: i:(1)(4)−(2)(3)=−2, j:−[(0)(4)−(2)(2)]=4, k:(0)(3)−(1)(2)=−2. b×c=⟨−2,4,−2⟩. a·(b×c)=(1)(−2)+(2)(4)+(3)(−2)=−2+8−6=0. <span class="final">Scalar triple product = 0, so the vectors are coplanar</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> If |a|=4, |b|=5, and the angle between them is 30°, find |a × b|.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">|a×b| = |a||b|sinθ = 4·5·sin30° = 20·(1/2). <span class="final">10</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -932,7 +1019,7 @@
     <h1 class="page-title">Equations of Lines and Planes</h1>
     <p class="lede">A line needs a point and a direction; a plane needs a point and a normal vector. Everything else follows from those two facts.</p>
 
-    <h3 class="subhead">Lines</h3>
+    <p>This section is really about translating between two ways of thinking about the same object. A line in space is completely determined once you know one point it passes through and the direction it travels in — no different from 2D, except the direction vector now has three components. A plane, on the other hand, is completely determined by one point on it and a vector <em>perpendicular</em> to it (the <em class="term">normal vector</em>) — this is a genuinely 3D idea, since "perpendicular to a whole plane" doesn't exist as a concept in 2D.</p>
     <div class="formula-grid">
       <div class="formula-box">
         <div class="flabel">Vector equation</div>
@@ -972,6 +1059,10 @@
       Given three points in a plane, form two vectors between them and take their <strong>cross product</strong> — that gives you n. Given two lines or two direction vectors that lie in the plane, cross those instead.
     </div>
 
+    <p><strong>Where the plane equation comes from:</strong> if r₀ is a known point in the plane and r = ⟨x,y,z⟩ is any other point in the plane, the vector r − r₀ lies entirely within the plane — which means it must be perpendicular to the normal vector n. "Perpendicular" is exactly what a dot product of zero tests for, which is why n · (r−r₀) = 0 is the defining equation. Expand that dot product component-by-component and you get the familiar a(x−x₀)+b(y−y₀)+c(z−z₀)=0, which simplifies to ax+by+cz=d once you collect the constants (with d = ax₀+by₀+cz₀).</p>
+
+    <p>The distance-from-a-point-to-a-plane formula follows the same logic as scalar projection from 12.3: pick any point Q on the plane, form the vector from Q to your point P₁, and project that vector onto the (unit) normal direction. The absolute value of that projection is the perpendicular distance — which is exactly what the formula D = |ax₁+by₁+cz₁−d| / √(a²+b²+c²) computes.</p>
+
     <div class="example">
       <div class="ex-label">Worked Example</div>
       <div class="ex-prompt">Find an equation of the plane through P(1, 3, 2), Q(3, −1, 6), R(5, 2, 0).</div>
@@ -979,6 +1070,14 @@
       <div class="ex-step"><span class="step-n">2</span><div class="step-body">Normal vector n = PQ × PR: <div class="step-math">i: (−4)(−2)−(4)(−1)=12 &nbsp; j: −[(2)(−2)−(4)(4)]=20 &nbsp; k: (2)(−1)−(−4)(4)=14</div></div></div>
       <div class="ex-step"><span class="step-n">3</span><div class="step-body">So n = ⟨12, 20, 14⟩ (or the simpler multiple ⟨6,10,7⟩). Use point P and n·(r−r₀)=0: <div class="step-math">6(x−1) + 10(y−3) + 7(z−2) = 0</div></div></div>
       <div class="ex-answer">6x + 10y + 7z = 50</div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Distance from a point to a plane</div>
+      <div class="ex-prompt">Find the distance from the point (1, 2, 3) to the plane 2x − y + 2z = 4.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Read off a=2, b=−1, c=2, d=4, and plug the point in: <div class="step-math">D = |2(1) − (2) + 2(3) − 4| / √(4+1+4)</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Simplify numerator and denominator: <div class="step-math">|2−2+6−4| / √9 = |2| / 3</div></div></div>
+      <div class="ex-answer">D = 2/3</div>
     </div>
 
     <h3 class="subhead">Practice</h3>
@@ -998,6 +1097,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">Normals ⟨1,2,−3⟩ and ⟨−2,−4,6⟩ = −2⟨1,2,−3⟩, so they're scalar multiples ⇒ parallel. Different constants (1 vs. −5/2 after scaling) ⇒ distinct planes. <span class="final">Parallel, but not identical</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find symmetric equations for the line of intersection of the planes x+y+z=1 and x+2y+3z=1.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Direction = cross of normals ⟨1,1,1⟩×⟨1,2,3⟩: i:(1)(3)−(1)(2)=1, j:−[(1)(3)−(1)(1)]=−2, k:(1)(2)−(1)(1)=1. Direction ⟨1,−2,1⟩. Solve the system for one point: let z=0 → x+y=1, x+2y=1 → y=0,x=1. Point (1,0,0). <span class="final">(x−1)/1 = y/(−2) = z/1</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find the distance from the point (0,0,0) to the plane 3x+4y+12z=13.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">D = |0+0+0−13|/√(9+16+144) = 13/√169 = 13/13. <span class="final">1</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1013,7 +1122,9 @@
 
     <p>A <em class="term">cylinder</em> in the Calc III sense is any surface generated by moving a straight line (parallel to a fixed axis) along a plane curve. If an equation is missing one variable entirely, it's a cylinder — the missing variable is the one the surface extends infinitely along. For example x² + y² = 9 (no z) is a circular cylinder extending along the z-axis.</p>
 
-    <p>A <em class="term">quadric surface</em> is the graph of a second-degree equation in x, y, z. To identify one, find its <em class="term">traces</em> — the curves obtained by setting x, y, or z equal to a constant — usually z = k.</p>
+    <p>A <em class="term">quadric surface</em> is the graph of a second-degree equation in x, y, z. To identify one, find its <em class="term">traces</em> — the curves obtained by setting x, y, or z equal to a constant — usually z = k. This is genuinely the only reliable strategy: rather than trying to memorize what every possible surface looks like from its equation alone, you slice it with a few well-chosen planes and identify each resulting 2D curve (circle, ellipse, parabola, hyperbola, or a pair of lines), then mentally stack those slices back together.</p>
+
+    <p>A practical workflow that works for almost every quadric surface problem you'll see: (1) if the equation isn't already in the "=1" or "=0" standard form, divide through to get there; (2) set z = k and simplify — this is usually the most informative trace; (3) also check x = k and y = k if the surface isn't obviously symmetric; (4) match the pattern of signs against the six standard forms below. Once you can recognize these six by their sign pattern, identifying a quadric becomes almost mechanical.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1061,6 +1172,16 @@
       <div class="ex-answer">Hyperboloid of one sheet (axis = y-axis); every trace y = k is an ellipse that grows as |k| increases.</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Hyperbolic paraboloid</div>
+      <div class="ex-prompt">Identify z = y² − x², and describe the traces at z=0, z=1, and x=0.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Rewrite as z = y²/1 − x²/1: this matches z/c = y²/b² − x²/a² (roles of x,y swapped from the standard box), so it's a <strong>hyperbolic paraboloid (saddle)</strong>.</div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Trace at z=0: <div class="step-math">y² − x² = 0 ⟹ y = ±x</div> — two crossing lines, the "center" of the saddle.</div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Trace at z=1: <div class="step-math">y² − x² = 1</div> — a hyperbola opening along the y-axis.</div></div>
+      <div class="ex-step"><span class="step-n">4</span><div class="step-body">Trace at x=0 (a vertical slice): <div class="step-math">z = y²</div> — an upward-opening parabola.</div></div>
+      <div class="ex-answer">Hyperbolic paraboloid; horizontal traces are hyperbolas (or crossing lines at z=0), vertical traces are parabolas — this is the classic "saddle" or "Pringle chip" shape.</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1078,6 +1199,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">Two minus signs. <span class="final">Hyperboloid of two sheets, axis along z</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Identify x²/4 + y²/9 + z²/4 = 1, and describe what makes it different from a sphere.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">All three positive, equal to 1, denominators not all equal. <span class="final">Ellipsoid — stretched longer along the y-axis (denominator 9) than along x or z (denominator 4 each); it would only be a sphere if all three denominators matched</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Identify y = x² + z², and find the trace at y = 9.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">One linear variable (y), two squared with matching positive coefficients — elliptic (here, circular) paraboloid opening along the y-axis. At y=9: x²+z²=9, a circle of radius 3. <span class="final">Circular paraboloid; trace at y=9 is the circle x²+z²=9</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1091,7 +1222,9 @@
     <h1 class="page-title">Vector Functions and Space Curves</h1>
     <p class="lede">Instead of tracking one output, a vector function tracks a whole point in space as it moves — this is how we describe curves and motion.</p>
 
-    <p>A <em class="term">vector-valued function</em> r(t) assigns a vector to each value of t: r(t) = ⟨f(t), g(t), h(t)⟩ = f(t)i + g(t)j + h(t)k. As t varies, the tip of r(t) traces out a <em class="term">space curve</em> C. The domain of r is the intersection of the domains of f, g, h.</p>
+    <p>A <em class="term">vector-valued function</em> r(t) assigns a vector to each value of t: r(t) = ⟨f(t), g(t), h(t)⟩ = f(t)i + g(t)j + h(t)k. As t varies, the tip of r(t) traces out a <em class="term">space curve</em> C. The domain of r is the intersection of the domains of f, g, h — you need every component function to be defined simultaneously, so find each piece's individual domain restriction and intersect them, exactly like example 1 below.</p>
+
+    <p>It helps to think of t as <strong>time</strong> and r(t) as the position of a moving particle. This isn't just a metaphor — it's literally the setup used throughout this chapter and again in physics: r(t) traces the path, r′(t) (next section) will give velocity, and r″(t) will give acceleration. A single vector function packages what would otherwise be three separate single-variable functions (x(t), y(t), z(t)) into one object you can differentiate and integrate all at once.</p>
 
     <div class="formula-box">
       <div class="flabel">Limit of a vector function</div>
@@ -1113,6 +1246,14 @@
       <div class="ex-answer">A helix on the cylinder x²+y²=1; it meets z = π at the point (−1, 0, π).</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Curve of intersection</div>
+      <div class="ex-prompt">Find a vector function for the curve where the plane y = 1 meets the paraboloid z = x² + y².</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">One variable is already pinned down by the plane: y = 1 everywhere on this curve, so let x be the free parameter: x = t.</div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Substitute x=t, y=1 into the paraboloid equation to get z in terms of t: <div class="step-math">z = t² + 1² = t² + 1</div></div></div>
+      <div class="ex-answer">r(t) = ⟨t, 1, t²+1⟩, t ∈ ℝ — this describes a parabola sitting in the plane y=1.</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1130,6 +1271,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">Componentwise: sin t/t → 1, e^t → 1, t ln t → 0. <span class="final">⟨1, 1, 0⟩</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Describe the curve r(t) = ⟨2 + 3t, −1 + t, 4 − 2t⟩.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Linear in each component. <span class="final">A straight line through (2,−1,4) with direction vector ⟨3,1,−2⟩</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find a vector function for the curve of intersection of the sphere x²+y²+z²=4 and the plane z=1.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Substituting z=1: x²+y²=3, a circle of radius √3. <span class="final">r(t) = ⟨√3 cos t, √3 sin t, 1⟩, 0≤t≤2π</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1142,6 +1293,10 @@
     <div class="section-eyebrow"><span class="num-badge">13.2</span> Chapter 13 · Vector Functions</div>
     <h1 class="page-title">Derivatives and Integrals of Vector Functions</h1>
     <p class="lede">Differentiate and integrate a vector function exactly the way you'd expect — one component at a time.</p>
+
+    <p>Geometrically, r′(t) is defined the same way an ordinary derivative is — as the limit of a difference quotient, [r(t+h) − r(t)]/h — except now the numerator is a vector (the secant line connecting two nearby points on the curve) instead of a number. As h → 0, that secant vector rotates into the <strong>tangent</strong> vector at r(t). This is why r′(t) always points along the curve's direction of travel: it's built from displacement, not just a slope.</p>
+
+    <p>All five differentiation rules in the box below look exactly like the ordinary product rule and sum rule from Calc I — because in a real sense, they are the product/sum rule, just applied component by component and then reassembled. The two that need the most care are the last two: since u·v is a <em>number</em>, differentiating it uses the ordinary scalar product rule; since u×v is a <em>vector</em>, you must preserve the order of u and v in each term (recall b×a = −a×b), so u′×v + u×v′ is correct but v′×u + v×u′ would flip signs incorrectly.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1170,6 +1325,14 @@
       <div class="ex-answer">r′(t) = ⟨2t, cos t, e^t⟩; T(0) = ⟨0, 1/√2, 1/√2⟩</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Finding r(t) from r′(t)</div>
+      <div class="ex-prompt">Find r(t) given r′(t) = ⟨2t, 3t², 1⟩ and the initial condition r(0) = ⟨1, 0, 5⟩.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Antidifferentiate each component (this is exactly like solving an initial-value problem in Calc I, just three times over): <div class="step-math">r(t) = ⟨t² + C₁, t³ + C₂, t + C₃⟩</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Plug in t=0 and match to the given initial condition ⟨1,0,5⟩: <div class="step-math">r(0) = ⟨C₁, C₂, C₃⟩ = ⟨1, 0, 5⟩</div></div></div>
+      <div class="ex-answer">r(t) = ⟨t²+1, t³, t+5⟩</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1187,6 +1350,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">r′(t) = ⟨−sin t, cos t, −tan t⟩. At t=0: ⟨0,1,0⟩, already unit length. <span class="final">T(0) = ⟨0, 1, 0⟩</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> If u(t) = ⟨t, t², 1⟩ and v(t) = ⟨1, 2t, t⟩, find d/dt[u(t)·v(t)] at t=1, two ways: (a) expand u·v first, then differentiate; (b) use the product rule u′·v + u·v′.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">(a) u·v = t+2t³+t = 2t+2t³, derivative 2+6t², at t=1: 8. (b) u′=⟨1,2t,0⟩,v′=⟨0,2,1⟩. At t=1: u=⟨1,1,1⟩,v=⟨1,2,1⟩,u′=⟨1,2,0⟩,v′=⟨0,2,1⟩. u′·v=1+4+0=5. u·v′=0+2+1=3. Sum=8. <span class="final">Both methods give 8 ✓</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Evaluate ∫ (e<sup>t</sup> i + 2t j + sin t k) dt.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer"><span class="final">e<sup>t</sup> i + t² j − cos t k + C</span> (C is a constant vector)</div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1199,6 +1372,10 @@
     <div class="section-eyebrow"><span class="num-badge">13.3</span> Chapter 13 · Vector Functions</div>
     <h1 class="page-title">Arc Length and Curvature</h1>
     <p class="lede">Two natural questions about a curve: how long is it, and how sharply does it bend? Both have clean formulas in terms of r(t).</p>
+
+    <p>The arc length formula is really just an extension of the Calc II formula L = ∫√(1+(dy/dx)²)dx — that formula is the special case of the general L = ∫|r′(t)|dt when the curve is parametrized as r(t) = ⟨t, f(t)⟩. |r′(t)| gives the instantaneous "speed" of the parametrization (how fast the point is tracing the curve), so integrating speed over the time interval gives total distance traveled — exactly the same logic as ∫speed dt = distance from a physics course.</p>
+
+    <p>Curvature is a subtler idea worth sitting with: T(t), the unit tangent vector, always has length 1 — it only ever <em>changes direction</em>, never magnitude. So |T′(t)| measures purely how fast the direction is rotating, which is exactly "how sharply the curve bends." Dividing by |r′(t)| converts this from "rate of turning per unit of the parameter t" into "rate of turning per unit of actual arc length traveled" — which is what makes κ a genuine geometric property of the curve, independent of how fast you happen to be parametrizing it.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1237,10 +1414,19 @@
       Curvature of a straight line is always 0; curvature of a circle of radius r is the constant 1/r. Use these to check your formula setup.
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Curvature of a circle (sanity check)</div>
+      <div class="ex-prompt">Verify that r(t) = ⟨a cos t, a sin t, 0⟩ (a circle of radius a) has constant curvature κ = 1/a.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Derivatives: <div class="step-math">r′(t) = ⟨−a sin t, a cos t, 0⟩ &nbsp; r″(t) = ⟨−a cos t, −a sin t, 0⟩</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Cross product (only the k-component survives, since both vectors lie in the xy-plane): <div class="step-math">r′×r″ = ⟨0, 0, a²sin²t + a²cos²t⟩ = ⟨0,0,a²⟩</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Magnitudes: |r′×r″| = a², |r′(t)| = a, so |r′|³ = a³: <div class="step-math">κ = a²/a³ = 1/a</div></div></div>
+      <div class="ex-answer">κ = 1/a, confirming the "curvature of a circle is 1/radius" rule used as a sanity check above.</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
-        <div class="practice-q"><span class="qn">1.</span> Find the length of r(t) = ⟨t, t², t³⟩... — actually, find the length of r(t) = ⟨2t, t², ⅓t³⟩ for 0 ≤ t ≤ 1. (Hint: |r′(t)|² simplifies to a perfect square.)</div>
+        <div class="practice-q"><span class="qn">1.</span> Find the length of r(t) = ⟨2t, t², ⅓t³⟩ for 0 ≤ t ≤ 1. (Hint: |r′(t)|² simplifies to a perfect square.)</div>
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">r′(t) = ⟨2, 2t, t²⟩, |r′(t)| = √(4+4t²+t⁴) = √(t²+2)² = t²+2. L = ∫₀¹(t²+2)dt = [t³/3+2t]₀¹ = 1/3+2. <span class="final">L = 7/3</span></div>
       </div>
@@ -1253,6 +1439,16 @@
         <div class="practice-q"><span class="qn">3.</span> Use κ = |f″|/[1+(f′)²]^(3/2) to find the curvature of y = x² at x = 0.</div>
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">f′ = 2x = 0 at x=0. f″ = 2. κ = 2/(1+0)^(3/2) = 2. <span class="final">κ(0) = 2</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find the length of the helix r(t) = ⟨cos t, sin t, t⟩ for 0 ≤ t ≤ 2π.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">r′(t)=⟨−sin t, cos t, 1⟩, |r′(t)|=√(sin²t+cos²t+1)=√2 (constant). L=∫₀^(2π)√2 dt. <span class="final">L = 2π√2</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find the arc length function s(t) = ∫₀ᵗ|r′(u)|du for r(t) = ⟨3t, 4t, 0⟩, starting at t=0.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">r′(u)=⟨3,4,0⟩, |r′(u)|=5 (constant). s(t)=∫₀ᵗ5 du. <span class="final">s(t) = 5t</span></div>
       </div>
     </div>
 
@@ -1267,7 +1463,11 @@
     <h1 class="page-title">Functions of Several Variables</h1>
     <p class="lede">This is where Calc III really begins: functions that take in more than one input, like z = f(x, y), a surface instead of a curve.</p>
 
-    <p>A function of two variables assigns a unique real number f(x,y) to each point (x,y) in some domain D ⊆ ℝ². Its graph is the surface {(x, y, f(x,y))} in ℝ³. To visualize such a surface without a 3D plot, use <em class="term">level curves</em>: the curve f(x,y) = k, for various constants k, drawn in the xy-plane — this is exactly how a topographic (contour) map works. For functions of three variables w = f(x,y,z), the analogous tool is a <em class="term">level surface</em> f(x,y,z) = k.</p>
+    <p>A function of two variables assigns a unique real number f(x,y) to each point (x,y) in some domain D ⊆ ℝ². Its graph is the surface {(x, y, f(x,y))} in ℝ³. Notice this is the exact same idea as a single-variable function's graph {(x, f(x))} — you're still plotting "input(s), then output" — you've just added a second input, which means the graph now needs a third dimension to be drawn. That's the whole conceptual leap of this chapter: everything you already know from Calc I (rates of change, tangent lines, max/min values) has a direct multivariable analogue; the machinery just has one more variable to track.</p>
+
+    <p>To visualize such a surface without a 3D plot, use <em class="term">level curves</em>: the curve f(x,y) = k, for various constants k, drawn in the xy-plane — this is exactly how a topographic (contour) map works, where each curve connects all the points at the same elevation. For functions of three variables w = f(x,y,z), the analogous tool is a <em class="term">level surface</em> f(x,y,z) = k (you can't draw a 4D graph, but you absolutely can draw the 3D surface where the function has a fixed value — this is exactly how the tangent-plane-to-a-level-surface idea in 14.6 works).</p>
+
+    <p>Finding a domain in this chapter usually reduces to the same three checks you already know from single-variable functions, just applied to an expression in two (or three) variables instead of one: no dividing by zero, no even root of a negative number, no logarithm of a non-positive number. The only new wrinkle is that the resulting domain is now a <em>region</em> of the plane (or of space) — a disk, a half-plane, the area above a curve — rather than just an interval of the number line.</p>
 
     <div class="callout tip">
       <div class="callout-title">Reading level curves</div>
@@ -1281,6 +1481,15 @@
       <div class="ex-step"><span class="step-n">2</span><div class="step-body">Domain is the closed disk of radius 3 centered at the origin.</div></div>
       <div class="ex-step"><span class="step-n">3</span><div class="step-body">Level curve f(x,y) = k: <div class="step-math">√(9−x²−y²) = k ⟹ x²+y² = 9−k²</div></div></div>
       <div class="ex-answer">Domain: x²+y² ≤ 9. Level curves are circles of radius √(9−k²), for 0 ≤ k ≤ 3 — this is actually a hemisphere, radius 3.</div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Domain with multiple restrictions</div>
+      <div class="ex-prompt">Find the domain of f(x,y) = √(y − x²) + ln(4 − x² − y²).</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">The square root needs a non-negative radicand: <div class="step-math">y − x² ≥ 0 &nbsp;⟺&nbsp; y ≥ x²</div> (on or above the parabola y=x²)</div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">The logarithm needs a strictly positive argument: <div class="step-math">4 − x² − y² > 0 &nbsp;⟺&nbsp; x²+y² < 4</div> (strictly inside the circle of radius 2)</div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">The domain of the sum is the <strong>intersection</strong> of both individual domains — both conditions must hold simultaneously.</div></div>
+      <div class="ex-answer">D = {(x,y) : y ≥ x² and x²+y² < 4} — the region inside the parabola's cup and strictly inside the circle.</div>
     </div>
 
     <h3 class="subhead">Practice</h3>
@@ -1299,6 +1508,16 @@
         <div class="practice-q"><span class="qn">3.</span> Find the domain of f(x,y,z) = √(4 − x² − y² − z²).</div>
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">4−x²−y²−z² ≥ 0. <span class="final">The solid ball x²+y²+z² ≤ 4</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find the domain of f(x,y) = √x / (x² + y²).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Need x ≥ 0 (for √x) and x²+y² ≠ 0, i.e. not the origin. <span class="final">{(x,y) : x ≥ 0} minus the point (0,0)</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Describe the level curves of f(x,y) = e<sup>xy</sup>.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">e^(xy)=k ⟺ xy=ln k (needs k>0). <span class="final">Family of hyperbolas xy = ln k (branches in quadrants I & III when ln k>0, quadrants II & IV when ln k<0); k=1 gives the two axes</span></div>
       </div>
     </div>
 
@@ -1326,12 +1545,25 @@
 
     <p>To actually <strong>prove</strong> a limit exists (when you suspect it does), bound |f(x,y) − L| by something that squeezes to 0 — often by switching to polar coordinates (x = r cos θ, y = r sin θ) and letting r → 0⁺, independent of θ. f is <em class="term">continuous</em> at (a,b) if lim<sub>(x,y)→(a,b)</sub> f(x,y) = f(a,b); polynomials and rational functions (away from zero denominators) are continuous everywhere on their domain, just as in one variable.</p>
 
+    <p>Why does polar substitution work so well for these limits? Because (x,y) → (0,0) is exactly equivalent to r → 0⁺, no matter what direction θ you approach from. If, after substituting x = r cosθ and y = r sinθ, you can bound the whole expression by something like C·r (where C doesn't depend on θ at all — often because it involves only bounded factors like sinθ, cosθ, or sin θcos θ, all of which stay between −1 and 1), then by the Squeeze Theorem the limit must be 0 regardless of the angle of approach. If instead θ refuses to cancel out of the final bound, that's usually a sign the limit doesn't exist.</p>
+
+    <p>A key practical distinction: proving a limit <strong>doesn't exist</strong> only requires finding two paths that disagree — often y = 0, then y = mx (a general line through the origin, or y=x specifically), then a curve like y = x² if lines alone don't reveal a contradiction. But proving a limit <strong>does exist</strong> is a fundamentally stronger claim — no finite collection of paths, however cleverly chosen, can ever rule out every possible path of approach. That asymmetry is why the polar/squeeze technique (or an explicit inequality bound) is the only reliable way to actually establish that a limit exists.</p>
+
     <div class="example">
       <div class="ex-label">Worked Example</div>
       <div class="ex-prompt">Show that lim<sub>(x,y)→(0,0)</sub> (xy)/(x²+y²) does not exist.</div>
       <div class="ex-step"><span class="step-n">1</span><div class="step-body">Approach along y = 0 (the x-axis): <div class="step-math">f(x,0) = 0/x² = 0 → 0</div></div></div>
       <div class="ex-step"><span class="step-n">2</span><div class="step-body">Approach along y = x: <div class="step-math">f(x,x) = x²/(2x²) = 1/2 → 1/2</div></div></div>
       <div class="ex-answer">Different limits along different paths (0 ≠ 1/2), so the limit does not exist.</div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Proving a limit exists</div>
+      <div class="ex-prompt">Show that lim<sub>(x,y)→(0,0)</sub> (3x²y)/(x²+y²) = 0.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Substitute polar coordinates x=r cosθ, y=r sinθ, so x²+y²=r²: <div class="step-math">f = 3(r²cos²θ)(r sinθ)/r² = 3r cos²θ sinθ</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Bound using |cosθ|≤1 and |sinθ|≤1: <div class="step-math">|f| = 3r|cos²θ sinθ| ≤ 3r</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">As (x,y)→(0,0), r→0⁺, so 3r→0. Squeeze Theorem: since 0 ≤ |f| ≤ 3r and 3r→0, |f| is forced to 0 too — <strong>regardless of θ</strong>, which is exactly what "the limit exists" requires.</div></div>
+      <div class="ex-answer">The limit equals 0 (no path-dependence survives, since the bound 3r had no θ left in it).</div>
     </div>
 
     <h3 class="subhead">Practice</h3>
@@ -1351,6 +1583,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">Along y=0: f=0. Along the parabola x=y²: f = y⁴/(2y⁴)=1/2. <span class="final">0 ≠ 1/2, so DNE (straight-line paths alone would have missed this!)</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Show lim<sub>(x,y)→(0,0)</sub> (xy)/√(x²+y²) = 0.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Polar: xy=r²cosθsinθ, √(x²+y²)=r. f = r cosθsinθ. |f|≤r→0. <span class="final">Limit = 0</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Is f(x,y) = (x²−y²)/(x−y) for x≠y, f(x,x)=0, continuous at (1,1)?</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">For x≠y, f(x,y)=(x−y)(x+y)/(x−y)=x+y, so lim<sub>(x,y)→(1,1)</sub>f(x,y)=1+1=2. But f(1,1)=0 by definition. <span class="final">Not continuous at (1,1): limit (2) ≠ function value (0)</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1363,6 +1605,10 @@
     <div class="section-eyebrow"><span class="num-badge">14.3</span> Chapter 14 · Partial Derivatives</div>
     <h1 class="page-title">Partial Derivatives</h1>
     <p class="lede">To differentiate a multivariable function, freeze every variable but one and differentiate as usual — that's the whole idea.</p>
+
+    <p>Geometrically, f<sub>x</sub>(a,b) is the slope of the tangent line to the curve you get by slicing the surface z=f(x,y) with the vertical plane y=b — you're looking at how z changes as you move in the x-direction only, holding y fixed at b. Likewise f<sub>y</sub>(a,b) is the slope of the tangent line where the plane x=a slices the surface. This is why "hold the other variable constant" isn't just an algebra trick — it corresponds to a genuine geometric slice of the surface.</p>
+
+    <p>In practice, almost every partial-derivative computation is just an ordinary single-variable derivative in disguise: whichever variable you're <em>not</em> differentiating with respect to gets treated exactly like a fixed number (say, treat y as if it were literally "5"). All your familiar rules — power rule, product rule, quotient rule, chain rule — apply unchanged; the only new skill is remembering which letter is currently "frozen."</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1395,6 +1641,16 @@
       Differentiate f<sub>y</sub> with respect to x instead and confirm you land on the same f<sub>yx</sub> = f<sub>xy</sub> — a great self-check on any partials problem.
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Implicit partial differentiation and higher-order partials</div>
+      <div class="ex-prompt">For f(x,y,z) = x²yz + sin(yz), a function of <em>three</em> variables, find f<sub>x</sub>, f<sub>y</sub>, f<sub>z</sub>, and f<sub>zz</sub>.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">For f<sub>x</sub>, freeze y and z (sin(yz) is entirely constant w.r.t. x): <div class="step-math">f<sub>x</sub> = 2xyz</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">For f<sub>y</sub>, freeze x and z; use the chain rule on sin(yz) treating z as a constant multiplier: <div class="step-math">f<sub>y</sub> = x²z + z cos(yz)</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">For f<sub>z</sub>, freeze x and y, chain rule on sin(yz): <div class="step-math">f<sub>z</sub> = x²y + y cos(yz)</div></div></div>
+      <div class="ex-step"><span class="step-n">4</span><div class="step-body">Differentiate f<sub>z</sub> again w.r.t. z (product rule on y cos(yz)): <div class="step-math">f<sub>zz</sub> = −y² sin(yz)</div></div></div>
+      <div class="ex-answer">f<sub>x</sub>=2xyz, &nbsp; f<sub>y</sub>=x²z+z cos(yz), &nbsp; f<sub>z</sub>=x²y+y cos(yz), &nbsp; f<sub>zz</sub>=−y²sin(yz)</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1412,6 +1668,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">f<sub>x</sub>=2x sin y, so f<sub>xy</sub>=2x cos y. f<sub>y</sub>=x²cos y+3y², so f<sub>yx</sub>=2x cos y. <span class="final">Both equal 2x cos y ✓</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find ∂z/∂x and ∂z/∂y for z = x/(x+y²).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Quotient rule, treating y as constant for ∂z/∂x: [(x+y²)(1)−x(1)]/(x+y²)² = y²/(x+y²)². For ∂z/∂y, treat x as constant: [0−x(2y)]/(x+y²)². <span class="final">∂z/∂x = y²/(x+y²)²; &nbsp; ∂z/∂y = −2xy/(x+y²)²</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find f<sub>xyz</sub> for f(x,y,z) = x²y³z⁴.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">f<sub>x</sub>=2xy³z⁴, f<sub>xy</sub>=6xy²z⁴, f<sub>xyz</sub>=24xy²z³. <span class="final">f<sub>xyz</sub> = 24xy²z³</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1424,6 +1690,10 @@
     <div class="section-eyebrow"><span class="num-badge">14.4</span> Chapter 14 · Partial Derivatives</div>
     <h1 class="page-title">Tangent Planes and Linear Approximations</h1>
     <p class="lede">The 3D analogue of a tangent line: the flat plane that best hugs a surface at a point, built directly from the partial derivatives there.</p>
+
+    <p>Recall from 12.5 that a plane is fully determined by a point plus a normal vector. The tangent plane equation here is really that same idea, specialized to a surface z=f(x,y): the two tangent-line slopes f<sub>x</sub>(a,b) and f<sub>y</sub>(a,b) each describe how z changes in the x- and y-directions right at that point, and together they pin down the unique plane that best matches the surface's behavior in every direction at (a,b) — not just along the two axis directions, but in <em>every</em> direction, which is exactly the content of differentiability.</p>
+
+    <p>The linearization L(x,y) plays the same role here that the tangent-line approximation f(a)+f′(a)(x−a) played in Calc I: it's the best flat (linear) stand-in for a curved function, valid for (x,y) close to (a,b). Since a plane is much easier to evaluate than most functions, linearization gives you a fast way to <em>estimate</em> f(x,y) near a known point without computing f directly — genuinely useful when f is expensive or awkward to evaluate exactly, and it's exactly what you're implicitly using anytime you round a nearby measurement to a nearby "nice" point and adjust.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1453,6 +1723,16 @@
       <div class="ex-answer">Tangent plane: z = 2x+4y−5. Estimate f(1.02,1.97) ≈ 4.92 (true value: 1.02²+1.97² = 4.9213 — very close!)</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Using the differential to estimate error</div>
+      <div class="ex-prompt">The dimensions of a closed rectangular box are measured as x=75 cm, y=60 cm, z=40 cm, each with a possible error of at most 0.2 cm. Use differentials to estimate the maximum error in the calculated volume V = xyz.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Find the partials of V: <div class="step-math">V<sub>x</sub>=yz, &nbsp; V<sub>y</sub>=xz, &nbsp; V<sub>z</sub>=xy</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Write the total differential: <div class="step-math">dV = yz &nbsp;dx + xz &nbsp;dy + xy &nbsp;dz</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Plug in x=75,y=60,z=40, and take dx=dy=dz=0.2 (the worst-case error in each measurement): <div class="step-math">dV = (60)(40)(0.2) + (75)(40)(0.2) + (75)(60)(0.2)</div></div></div>
+      <div class="ex-step"><span class="step-n">4</span><div class="step-body">Compute each term: 480 + 600 + 900: <div class="step-math">dV = 480 + 600 + 900 = 1980</div></div></div>
+      <div class="ex-answer">Maximum estimated error in volume ≈ 1980 cm³ (this "propagation of error" application is a classic use of the total differential).</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1470,6 +1750,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">f<sub>x</sub>=e<sup>y</sup>, f<sub>y</sub>=xe<sup>y</sup>+2y. <span class="final">dz = e<sup>y</sup> dx + (xe<sup>y</sup>+2y) dy</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find the tangent plane to z = ln(x²+y²) at the point (1, 0, 0).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">f<sub>x</sub>=2x/(x²+y²)=2 at (1,0). f<sub>y</sub>=2y/(x²+y²)=0 at (1,0). <span class="final">z − 0 = 2(x−1) + 0(y−0), i.e. z = 2x − 2</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> The radius and height of a cylinder are measured as r=8 cm, h=12 cm, each accurate to within 0.05 cm. Estimate the maximum error in the computed volume V=πr²h.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">V<sub>r</sub>=2πrh, V<sub>h</sub>=πr². dV=2πrh·dr+πr²·dh = 2π(8)(12)(0.05)+π(64)(0.05) = 9.6π+3.2π. <span class="final">dV = 12.8π ≈ 40.2 cm³</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1482,6 +1772,10 @@
     <div class="section-eyebrow"><span class="num-badge">14.5</span> Chapter 14 · Partial Derivatives</div>
     <h1 class="page-title">The Chain Rule</h1>
     <p class="lede">When x and y are themselves functions of other variables, you need to add up every path of dependency — that's the multivariable chain rule.</p>
+
+    <p>The one-variable chain rule you already know, dz/dt = (dz/dx)(dx/dt), only has one "path" for the dependency to flow through: t affects x, which affects z. In the multivariable case, t might affect z through <em>several different routes at once</em> — through x <em>and</em> through y independently — and the chain rule says you have to account for every route and add the contributions together. That's exactly what Case 1's formula does: one term for "the x-route," one term for "the y-route," summed.</p>
+
+    <p>Case 2 is the same idea with more routes still: now s and t both potentially reach z through both x and y, giving four elementary derivatives (∂x/∂s, ∂y/∂s, ∂x/∂t, ∂y/∂t) combined with the two partials of z. If you ever face a chain rule problem with even more layers (say w depends on x,y,z, and those depend on r,s), the tree-diagram method generalizes without any new ideas — just more branches to multiply and sum.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1512,6 +1806,15 @@
       <div class="ex-answer">dz/dt|₍t=0₎ = 3</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Case 2 (two intermediate, two independent variables)</div>
+      <div class="ex-prompt">If z = e<sup>x</sup>sin y, x = st², y = s²t, find ∂z/∂t.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Partials of z, and of x, y w.r.t. t: <div class="step-math">∂z/∂x = e<sup>x</sup>sin y, &nbsp; ∂z/∂y = e<sup>x</sup>cos y, &nbsp; ∂x/∂t = 2st, &nbsp; ∂y/∂t = s²</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Chain rule (Case 2, holding s fixed since we want ∂z/∂t): <div class="step-math">∂z/∂t = (e<sup>x</sup>sin y)(2st) + (e<sup>x</sup>cos y)(s²)</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Substitute back x=st², y=s²t if a fully explicit answer is needed: <div class="step-math">∂z/∂t = 2st &nbsp;e<sup>st²</sup>sin(s²t) + s² &nbsp;e<sup>st²</sup>cos(s²t)</div></div></div>
+      <div class="ex-answer">∂z/∂t = e<sup>st²</sup>[2st sin(s²t) + s² cos(s²t)]</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1529,6 +1832,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">F=x²+y²+z²−3xyz. F<sub>x</sub>=2x−3yz, F<sub>z</sub>=2z−3xy. <span class="final">∂z/∂x = −(2x−3yz)/(2z−3xy) = (3yz−2x)/(2z−3xy)</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> If w = x² + y² + z², x = ρ sinφ cosθ, y = ρ sinφ sinθ, z = ρ cosφ, find ∂w/∂ρ.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">∂w/∂x=2x, ∂w/∂y=2y, ∂w/∂z=2z. ∂x/∂ρ=sinφcosθ, ∂y/∂ρ=sinφsinθ, ∂z/∂ρ=cosφ. Sum: 2x sinφcosθ+2y sinφsinθ+2z cosφ. Substituting shows this simplifies (since x²+y²+z²=ρ²) to: <span class="final">∂w/∂ρ = 2ρ</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> If z = f(x,y) where x = r cosθ, y = r sinθ, find ∂z/∂θ in terms of z<sub>x</sub>, z<sub>y</sub>.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">∂x/∂θ=−r sinθ=−y, ∂y/∂θ=r cosθ=x. <span class="final">∂z/∂θ = −y·z<sub>x</sub> + x·z<sub>y</sub></span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1541,6 +1854,10 @@
     <div class="section-eyebrow"><span class="num-badge">14.6</span> Chapter 14 · Partial Derivatives</div>
     <h1 class="page-title">Directional Derivatives and the Gradient Vector</h1>
     <p class="lede">f<sub>x</sub> and f<sub>y</sub> only measure change along the axes. The directional derivative measures the rate of change in <em>any</em> direction — and the gradient tells you which direction is steepest.</p>
+
+    <p>Think of f<sub>x</sub> as "the special case of D<sub>u</sub>f when u = i" and f<sub>y</sub> as "the special case when u = j" — the directional derivative simply generalizes these two axis-aligned rates of change into a rate of change along <em>any</em> unit direction u = ⟨a,b⟩. The formula D<sub>u</sub>f = f<sub>x</sub>a + f<sub>y</sub>b is itself just an application of the Case 1 chain rule from 14.5: if you walk along the line x=x₀+at, y=y₀+bt, then d/dt f(x,y) = f<sub>x</sub>(dx/dt)+f<sub>y</sub>(dy/dt) = f<sub>x</sub>a+f<sub>y</sub>b, which is exactly the directional derivative in that direction.</p>
+
+    <p>The gradient's "steepest ascent" property follows straight from the dot-product formula D<sub>u</sub>f = ∇f · u = |∇f||u|cosθ = |∇f|cosθ (since u is a unit vector). This quantity is maximized exactly when cosθ = 1, i.e. when u points in the same direction as ∇f — and the maximum value achieved is |∇f|. This single fact — that ∇f always points in the direction of fastest increase, with the magnitude of the fastest rate — is arguably the most important idea in this section, and it's the reason gradient-based methods (in optimization, machine learning, physics, everywhere) walk "uphill" by stepping in the direction of ∇f.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1576,6 +1893,15 @@
       <div class="ex-answer">D<sub>u</sub>f(2,−1) = 32/√29. Steepest increase is in the direction ⟨−4, 8⟩ (i.e., ∇f itself), with rate |∇f| = √80 = 4√5.</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Direction of steepest descent, and zero-change directions</div>
+      <div class="ex-prompt">For f(x,y) = x²y, at the point (2, 1): find the direction of steepest <em>decrease</em>, and a direction in which the rate of change is zero.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Gradient: <div class="step-math">∇f = ⟨2xy, x²⟩ &nbsp;⟹&nbsp; ∇f(2,1) = ⟨4, 4⟩</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Steepest decrease is the exact opposite of steepest increase — the direction −∇f: <div class="step-math">−∇f(2,1) = ⟨−4, −4⟩ &nbsp;(or the unit direction ⟨−1/√2, −1/√2⟩)</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Zero rate of change happens exactly when D<sub>u</sub>f = ∇f·u = 0, i.e. when u is <strong>orthogonal</strong> to ∇f. Since ∇f=⟨4,4⟩, any vector like ⟨1,−1⟩ works (dot product 4−4=0); normalize it: <div class="step-math">u = ⟨1/√2, −1/√2⟩</div></div></div>
+      <div class="ex-answer">Steepest decrease: direction ⟨−1,−1⟩ (unit ⟨−1/√2,−1/√2⟩). Zero-change direction: ⟨1,−1⟩ (unit ⟨1/√2,−1/√2⟩) — this is exactly tangent to the level curve through (2,1), which makes sense: moving along a level curve, f doesn't change at all.</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1593,6 +1919,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">F=x²+2y²+3z²−6. ∇F=⟨2x,4y,6z⟩, at (1,1,1): ⟨2,4,6⟩. Plane: 2(x−1)+4(y−1)+6(z−1)=0. <span class="final">2x+4y+6z=12, i.e. x+2y+3z=6</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find the directional derivative of f(x,y,z)=xyz at (1,2,3) in the direction of v=⟨2,1,−2⟩ (not a unit vector).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">∇f=⟨yz,xz,xy⟩, at (1,2,3): ⟨6,3,2⟩. |v|=√(4+1+4)=3, u=⟨2/3,1/3,−2/3⟩. D<sub>u</sub>f=6(2/3)+3(1/3)+2(−2/3)=4+1−4/3. <span class="final">D<sub>u</sub>f = 11/3</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find a direction in which the directional derivative of f(x,y)=x²−y² at (1,1) is zero.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">∇f=⟨2x,−2y⟩, at (1,1): ⟨2,−2⟩. Need u orthogonal to this: e.g. ⟨1,1⟩ (dot=2−2=0). Normalize. <span class="final">u = ⟨1/√2, 1/√2⟩ (or its negative)</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1605,6 +1941,10 @@
     <div class="section-eyebrow"><span class="num-badge">14.7</span> Chapter 14 · Partial Derivatives</div>
     <h1 class="page-title">Maximum and Minimum Values</h1>
     <p class="lede">Optimization in two variables: find the critical points, then use a determinant test to classify each one as a max, min, or saddle.</p>
+
+    <p>Why must both partials vanish at a local max or min? Picture standing at the very top of a hill on the surface z=f(x,y). If you walk in the x-direction, you're momentarily at a single-variable max, so f<sub>x</sub>=0 there (ordinary Calc I logic, applied along that slice). The same argument applies walking in the y-direction, forcing f<sub>y</sub>=0 too. So both partials must be zero simultaneously — that's the definition of a critical point, and it's a <em>necessary</em> condition for an extremum, exactly analogous to f′(x)=0 in one variable.</p>
+
+    <p>But in two variables, a new possibility opens up that never occurs in one: a <em class="term">saddle point</em>, where the surface curves upward in one direction and downward in another (think of the middle of a Pringle chip, or a mountain pass — up toward the peaks on either side, down toward the valleys on the other two sides). This is exactly why the single-variable "check the sign of f″" test isn't enough anymore — you need the Second Derivatives Test, D = f<sub>xx</sub>f<sub>yy</sub> − (f<sub>xy</sub>)², to detect this new case. Intuitively, D measures whether the surface curves the <em>same way</em> in every direction (D&gt;0, giving a genuine max or min) or <em>opposite ways</em> in different directions (D&lt;0, a saddle).</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1638,6 +1978,16 @@
       <div class="ex-answer">Local minimum at (1, 2) with f(1,2) = 1−3+4−8 = −6. Saddle point at (−1, 2).</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Absolute extrema on a closed region</div>
+      <div class="ex-prompt">Find the absolute maximum and minimum of f(x,y) = x² + y² − 2x on the closed disk D: x²+y² ≤ 4.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Interior critical points: <div class="step-math">f<sub>x</sub>=2x−2=0 ⟹ x=1, &nbsp; f<sub>y</sub>=2y=0 ⟹ y=0</div></div> Point (1,0) is inside D (since 1²+0²=1≤4). f(1,0) = 1+0−2 = −1.</div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Now check the boundary x²+y²=4. Parametrize: x=2cosθ, y=2sinθ, 0≤θ≤2π. Substitute into f: <div class="step-math">g(θ) = 4cos²θ+4sin²θ−4cosθ = 4 − 4cosθ</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">This single-variable function of θ is easy to optimize directly: g is smallest when cosθ=1 (θ=0, giving g=0) and largest when cosθ=−1 (θ=π, giving g=8).</div></div>
+      <div class="ex-step"><span class="step-n">4</span><div class="step-body">Compare all candidates: interior point gives −1; boundary gives a range from 0 to 8.</div></div>
+      <div class="ex-answer">Absolute minimum −1 at (1,0) (interior); absolute maximum 8 at (−2,0) (boundary, θ=π).</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1655,6 +2005,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">f<sub>x</sub>=y=0, f<sub>y</sub>=x=0 ⟹ (0,0). f<sub>xx</sub>=0,f<sub>yy</sub>=0,f<sub>xy</sub>=1. D=0−1=−1<0. <span class="final">Saddle point at (0,0)</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find and classify the critical points of f(x,y) = x⁴ + y⁴ − 4xy + 1.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">f<sub>x</sub>=4x³−4y=0→y=x³. f<sub>y</sub>=4y³−4x=0→x=y³. Substituting: x=(x³)³=x⁹→x⁹−x=0→x(x⁸−1)=0→x=0,±1. Points: (0,0),(1,1),(−1,−1). f<sub>xx</sub>=12x², f<sub>yy</sub>=12y², f<sub>xy</sub>=−4. At (0,0): D=0−16=−16<0, saddle. At (1,1) and (−1,−1): D=(12)(12)−16=128>0, f<sub>xx</sub>=12>0, local min. <span class="final">Saddle at (0,0); local minima at (1,1) and (−1,−1), both with f=−1</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> A rectangular box (open top) is to have volume 32 m³. Find the dimensions that minimize the surface area. (Set up: minimize S=xy+2xz+2yz subject to xyz=32, i.e. z=32/(xy).)</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">S(x,y)=xy+64/y+64/x. S<sub>x</sub>=y−64/x²=0, S<sub>y</sub>=x−64/y²=0. From these, x²y=64 and xy²=64, so x=y. Then x³=64→x=4. z=32/16=2. <span class="final">x=y=4 m, z=2 m</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1667,6 +2027,10 @@
     <div class="section-eyebrow"><span class="num-badge">15.1</span> Chapter 15 · Multiple Integrals</div>
     <h1 class="page-title">Double Integrals over Rectangles</h1>
     <p class="lede">Just as a single integral computes area under a curve, a double integral computes volume under a surface — built the same way, from a Riemann sum.</p>
+
+    <p>Recall how the single-variable definite integral was built: chop [a,b] into n small subintervals of width Δx, evaluate f at a sample point in each one, multiply by Δx to get a thin rectangle's area, and add up all the rectangles. As n→∞, this Riemann sum converges to the exact area. The double integral does the exact same thing one dimension up: chop the rectangle R into a grid of small sub-rectangles each with area ΔA = Δx·Δy, evaluate f at a sample point in each cell, multiply by ΔA to get the volume of a thin rectangular column standing on that cell, and add up all the columns. This is precisely the "volume under a surface" picture — you're filling the solid region between R and the surface z=f(x,y) with skinny boxes and adding their volumes.</p>
+
+    <p>Fubini's Theorem is the computational payoff of this section: rather than ever computing a genuine 2D limit of sums, you're guaranteed you can evaluate a double integral as two <em>ordinary</em>, sequential single-variable integrals — first integrate with respect to one variable (treating the other as a constant, exactly like a partial derivative but in reverse), then integrate the result with respect to the remaining variable. The "inside-out" order (innermost differential first) is exactly the same convention used for triple integrals in Chapter 15.6 and beyond, so it's worth getting comfortable with it now.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1693,6 +2057,15 @@
       <div class="ex-answer">∬<sub>R</sub>(x−3y²)dA = −12</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Volume interpretation</div>
+      <div class="ex-prompt">Find the volume of the solid that lies under the plane z = 4 − x − y and above the rectangle R = [0,1]×[0,2].</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Set up the double integral (volume = ∬ z dA when z≥0 on R): <div class="step-math">V = ∫₀¹∫₀² (4−x−y) dy dx</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Inner integral (dy), treating x as constant: <div class="step-math">∫₀²(4−x−y)dy = [4y−xy−y²/2]₀² = 8−2x−2</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Simplify and integrate w.r.t. x: <div class="step-math">∫₀¹(6−2x)dx = [6x−x²]₀¹ = 6−1</div></div></div>
+      <div class="ex-answer">V = 5</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1710,6 +2083,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">Inner (dx): ∫₀¹ y sin(xy)dx = [−cos(xy)]₀¹ = 1−cos y. Outer: ∫₀^π(1−cos y)dy = [y−sin y]₀^π = π − 0. <span class="final">π</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Evaluate ∬<sub>R</sub> x e<sup>xy</sup> dA, R = [0,1]×[0,1] — integrate w.r.t. y first.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Inner (dy): ∫₀¹ x e<sup>xy</sup>dy = [e<sup>xy</sup>]₀¹ = e<sup>x</sup>−1. Outer: ∫₀¹(e<sup>x</sup>−1)dx = [e<sup>x</sup>−x]₀¹ = (e−1)−1. <span class="final">e − 2</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find the average value of f(x,y) = x²y over R = [0,2]×[0,4]. (Average = (1/Area)∬f dA.)</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">∬f dA=(∫₀²x²dx)(∫₀⁴y dy)=(8/3)(8)=64/3. Area=8. Average=(64/3)/8. <span class="final">8/3</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1722,6 +2105,10 @@
     <div class="section-eyebrow"><span class="num-badge">15.2</span> Chapter 15 · Multiple Integrals</div>
     <h1 class="page-title">Double Integrals over General Regions</h1>
     <p class="lede">Most interesting regions aren't rectangles — the trick is setting up the correct bounds, which depend on the order of integration.</p>
+
+    <p>The whole difficulty of this section is bounds, not integration technique — once your bounds are correct, evaluating the resulting iterated integral is exactly the same skill from 15.1. What's new is that the <em>inner</em> integral's bounds are now allowed to depend on the outer variable (functions of x, or functions of y), rather than being fixed numbers. The rule of thumb: the <strong>outer</strong> limits of integration must always be plain numbers (constants); the <strong>inner</strong> limits are allowed to be functions of the outer variable, but never the other way around.</p>
+
+    <p>A Type I region is one you can describe by "sweep a vertical strip from x=a to x=b; within each strip, y runs from a bottom curve g₁(x) up to a top curve g₂(x)." A Type II region is the mirror image — horizontal strips instead. Some regions are naturally both types (a rectangle, or a disk); some are much easier to describe as one type than the other; and some regions genuinely need to be split into pieces and treated as a Type I region on one piece, Type II (or a different Type I) on another. Always start by sketching the region — the bounds essentially read themselves off a good sketch.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1754,10 +2141,20 @@
       <div class="ex-answer">∬<sub>D</sub> xy dA = 1/24</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Reversing the order to make an integral solvable</div>
+      <div class="ex-prompt">Evaluate ∫₀¹ ∫<sub>x</sub>¹ e<sup>y²</sup> dy dx by reversing the order of integration (e<sup>y²</sup> has no elementary antiderivative, so the given order can't be evaluated directly).</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Read off the current (Type II-ish) description: 0≤x≤1, x≤y≤1. Sketch it — it's a triangle bounded by y=x, y=1, and x=0.</div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Re-describe the same triangle as Type I instead (y outer, x inner): for a fixed y between 0 and 1, x runs from 0 up to y: <div class="step-math">∫₀¹ ∫₀^y e<sup>y²</sup> dx dy</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Now the inner integral is trivial (e<sup>y²</sup> is constant w.r.t. x): <div class="step-math">∫₀^y e<sup>y²</sup> dx = y &nbsp;e<sup>y²</sup></div></div></div>
+      <div class="ex-step"><span class="step-n">4</span><div class="step-body">Outer integral, using substitution u=y², du=2y dy: <div class="step-math">∫₀¹ y e<sup>y²</sup> dy = [½e<sup>y²</sup>]₀¹ = ½(e−1)</div></div></div>
+      <div class="ex-answer">The original integral = ½(e − 1) — solvable only after reversing the order.</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
-        <div class="practice-q"><span class="qn">1.</span> Evaluate ∬<sub>D</sub> (x+2y) dA, where D = {(x,y) : 0≤x≤1, x²≤y≤x}... wait, use D = {0≤x≤1, 0≤y≤x²}.</div>
+        <div class="practice-q"><span class="qn">1.</span> Evaluate ∬<sub>D</sub> (x+2y) dA, where D = {0≤x≤1, 0≤y≤x²}.</div>
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">Inner: ∫₀^(x²)(x+2y)dy=[xy+y²]₀^(x²)=x³+x⁴. Outer: ∫₀¹(x³+x⁴)dx=1/4+1/5. <span class="final">9/20</span></div>
       </div>
@@ -1771,6 +2168,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">Region: 0≤y≤1, y≤x≤1 — a triangle. Rewritten with x outer: for 0≤x≤1, y ranges 0 to x. <span class="final">∫₀¹ ∫₀ˣ f(x,y) dy dx</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find the volume under z = xy and above the region bounded by y = x and y = x² in the first quadrant.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Curves meet at x=0,1; for 0≤x≤1, x²≤y≤x. V=∫₀¹∫<sub>x²</sub>ˣ xy dy dx = ∫₀¹ x[y²/2]<sub>x²</sub>ˣ dx = ∫₀¹ x(x²/2−x⁴/2)dx = ∫₀¹(x³/2−x⁵/2)dx = 1/8−1/12. <span class="final">1/24</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find the area of the region bounded by y=x² and y=2−x² using a double integral (∬<sub>D</sub>1 dA).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Curves meet where x²=2−x²→x=±1. For −1≤x≤1, x²≤y≤2−x². A=∫<sub>−1</sub>¹(2−x²−x²)dx=∫<sub>−1</sub>¹(2−2x²)dx=[2x−2x³/3]<sub>−1</sub>¹=(2−2/3)−(−2+2/3). <span class="final">A = 8/3</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1783,6 +2190,10 @@
     <div class="section-eyebrow"><span class="num-badge">15.3</span> Chapter 15 · Multiple Integrals</div>
     <h1 class="page-title">Double Integrals in Polar Coordinates</h1>
     <p class="lede">When a region is circular or wedge-shaped, converting to polar coordinates turns an ugly integral into a manageable one — but don't forget the extra factor of r.</p>
+
+    <p>Where does the extra r come from? In Cartesian coordinates, a tiny piece of area dA is a rectangle: dx times dy. In polar coordinates, the natural "grid cells" aren't rectangles — they're tiny curved wedges, bounded by two circles of radii r and r+dr, and two rays at angles θ and θ+dθ. That little wedge has an approximate area of (r dθ)(dr) — the "radial thickness" dr times the "arc length" r dθ traced out at radius r. That extra factor of r in "r dθ" is precisely where dA = r dr dθ comes from: the farther out you are from the origin, the more area a given angular slice sweeps out, so cells at large r contribute proportionally more area than cells at small r for the same dr, dθ.</p>
+
+    <p>Practically, converting a Cartesian double integral to polar is a three-part substitution: replace x with r cosθ, replace y with r sinθ (and simplify — x²+y² collapses beautifully to r²), and replace dA with r dr dθ (never forget this last piece — it is not just "dr dθ"). Then re-describe the region's boundary curves in terms of r and θ instead of x and y.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1810,6 +2221,16 @@
       <div class="ex-answer">∬<sub>D</sub> e<sup>−(x²+y²)</sup> dA = π(1 − e⁻⁴)</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Volume of a solid using polar</div>
+      <div class="ex-prompt">Find the volume of the solid inside both the cylinder x²+y²=1 and the sphere x²+y²+z²=4.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Solve the sphere for z: z=±√(4−x²−y²). The solid runs from the bottom half to the top half, so its volume is: <div class="step-math">V = ∬<sub>D</sub> 2√(4−x²−y²) dA, &nbsp; D: x²+y²≤1</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Convert to polar (D is a disk — a perfect fit): <div class="step-math">V = ∫₀^(2π)∫₀¹ 2√(4−r²) &nbsp;r &nbsp;dr &nbsp;dθ</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Inner integral, substitution u=4−r², du=−2r dr: <div class="step-math">∫₀¹ 2r√(4−r²)dr = [−⅔(4−r²)^{3/2}]₀¹ = −⅔(3^{3/2}) + ⅔(8) = ⅔(8−3√3)</div></div></div>
+      <div class="ex-step"><span class="step-n">4</span><div class="step-body">Outer integral (constant integrand w.r.t. θ): <div class="step-math">∫₀^(2π) ⅔(8−3√3) dθ = 2π·⅔(8−3√3)</div></div></div>
+      <div class="ex-answer">V = (4π/3)(8 − 3√3)</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1827,6 +2248,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">First quadrant: 0≤θ≤π/2. Annulus: 1≤r≤2. Integrand: r cosθ+r sinθ. <span class="final">∫₀^(π/2)∫₁² (r cosθ+r sinθ)·r dr dθ</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find the area inside the circle r = 3 sinθ (a circle passing through the origin, entirely in the upper half plane for 0≤θ≤π).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">A=∫₀^π∫₀^(3sinθ) r dr dθ = ∫₀^π (9/2)sin²θ dθ = (9/2)·∫₀^π ½(1−cos2θ)dθ = (9/4)[θ−½sin2θ]₀^π = (9/4)(π). <span class="final">9π/4</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Evaluate ∬<sub>D</sub> (x²+y²)^{3/2} dA, where D is the disk x²+y²≤9.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">(x²+y²)^{3/2}=r³. ∫₀^(2π)∫₀³ r³·r dr dθ = (2π)∫₀³r⁴dr=(2π)(243/5). <span class="final">486π/5</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1839,6 +2270,10 @@
     <div class="section-eyebrow"><span class="num-badge">15.6</span> Chapter 15 · Multiple Integrals</div>
     <h1 class="page-title">Triple Integrals</h1>
     <p class="lede">Add a third dimension to the double integral and you get triple integrals — the natural tool for mass, volume, and averages over solid regions.</p>
+
+    <p>The conceptual jump from double to triple integrals is small — you're chopping a solid region E into tiny boxes of volume dV = dx dy dz (instead of chopping a flat region into tiny rectangles of area dA), evaluating f at a sample point in each box, and summing f · dV over every box. Just like Fubini's Theorem let you peel a double integral apart into two ordinary single-variable integrals, the same theorem lets you peel a triple integral apart into three, done one variable at a time, from the inside out.</p>
+
+    <p>Setting up bounds for a "Type 1" solid region (the most common case) follows a clean three-step recipe: <strong>(1)</strong> figure out the surfaces that bound the solid <em>above</em> and <em>below</em> in the z-direction — these become your z-bounds, and they're allowed to be functions of both x and y; <strong>(2)</strong> imagine flattening the solid straight down onto the xy-plane (its "shadow") — that flat region is D; <strong>(3)</strong> set up D's bounds exactly the way you did in 15.2, as an ordinary 2D double integral. The z-integral always goes first (innermost); the x- and y-integrals wrap around it exactly as they would for any double integral over D.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1872,6 +2307,17 @@
       <div class="ex-answer">∭<sub>E</sub> 6xy dV = 1 + 3/4 + 4/7 = 131/28</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Volume of a tetrahedron</div>
+      <div class="ex-prompt">Find the volume of the tetrahedron bounded by the coordinate planes and the plane x + 2y + z = 4.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Solve for the top surface: z ranges from 0 up to 4−x−2y. Project down to find D: set z=0 in the plane to get the boundary of D: <div class="step-math">x + 2y = 4 &nbsp;⟹&nbsp; y = (4−x)/2, &nbsp; 0 ≤ x ≤ 4</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Set up the triple integral for volume: <div class="step-math">V = ∫₀⁴ ∫₀^{(4−x)/2} ∫₀^{4−x−2y} dz &nbsp;dy &nbsp;dx</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Inner integral (dz) is trivial: <div class="step-math">∫₀^{4−x−2y} dz = 4−x−2y</div></div></div>
+      <div class="ex-step"><span class="step-n">4</span><div class="step-body">Middle integral (dy): <div class="step-math">∫₀^{(4−x)/2}(4−x−2y)dy = [(4−x)y − y²]₀^{(4−x)/2} = (4−x)²/2 − (4−x)²/4 = (4−x)²/4</div></div></div>
+      <div class="ex-step"><span class="step-n">5</span><div class="step-body">Outer integral (dx), substitution u=4−x: <div class="step-math">∫₀⁴ (4−x)²/4 dx = [−(4−x)³/12]₀⁴ = 0 − (−64/12) = 16/3</div></div></div>
+      <div class="ex-answer">V = 16/3</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1889,6 +2335,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">∫₀¹∫₀¹∫₀^y z dz dy dx = ∫₀¹∫₀¹ (y²/2) dy dx = ∫₀¹ (1/6) dx. <span class="final">1/6</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find the mass of the solid region E: 0≤x≤1, 0≤y≤x, 0≤z≤x+y, with density δ(x,y,z)=2.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">M=∭2 dV=∫₀¹∫₀ˣ∫₀^{x+y}2 dz dy dx=∫₀¹∫₀ˣ 2(x+y)dy dx=∫₀¹[2xy+y²]₀ˣ dx=∫₀¹(2x²+x²)dx=∫₀¹3x²dx. <span class="final">M = 1</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Evaluate ∭<sub>E</sub> x dV, E the solid bounded by the paraboloid x=y²+z² and the plane x=4.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">This is more naturally set up with x outermost: for fixed y,z with y²+z²≤4, x ranges y²+z² to 4. Switching to a "shadow" in the yz-plane (disk radius 2) and using polar there (y=ρcosθ,z=ρsinθ): ∭x dV=∬<sub>yz-disk</sub>∫_{y²+z²}^4 x dx dA = ∬ [x²/2] from y²+z² to 4 dA = ∬ (16−(y²+z²)²)/2 dA. In polar: ∫₀^(2π)∫₀² (16−ρ⁴)/2 · ρ dρ dθ = ∫₀^(2π)dθ · ∫₀²(8ρ−ρ⁵/2)dρ = 2π[4ρ²−ρ⁶/12]₀² = 2π(16 − 64/12). <span class="final">V-weighted integral = 2π(16 − 16/3) = 64π/3</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1901,6 +2357,10 @@
     <div class="section-eyebrow"><span class="num-badge">15.7</span> Chapter 15 · Multiple Integrals</div>
     <h1 class="page-title">Triple Integrals in Cylindrical Coordinates</h1>
     <p class="lede">Cylindrical coordinates are just polar coordinates in the xy-plane with z left alone — ideal for solids with circular cross-sections.</p>
+
+    <p>There's genuinely nothing new to learn here beyond what you already know from 15.3 and 15.6 combined: take the polar substitution (x=r cosθ, y=r sinθ, dA=r dr dθ) and simply carry it straight into a triple integral, leaving z completely untouched. The extra factor of r shows up in dV for exactly the same reason it showed up in dA back in 15.3 — you're still slicing the region into thin wedge-shaped pieces in the xy-direction, just stacking them up through a range of z values now instead of treating them as flat.</p>
+
+    <p>The setup recipe is a direct extension of the Type 1 recipe from 15.6: find the z-bounds first (these can now be functions of r and θ, via x²+y²=r²), then find the "shadow" region D in the xy-plane and describe <em>that</em> in polar coordinates (r and θ bounds), exactly as in 15.3. When you see a cylinder, cone, or paraboloid whose cross-sections perpendicular to the z-axis are circles, that's your cue to reach for cylindrical coordinates.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1934,6 +2394,16 @@
       <div class="ex-answer">V = 81π/2</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Mass with a variable density</div>
+      <div class="ex-prompt">Find the mass of the solid cylinder x²+y²≤4, 0≤z≤3, if the density at each point is δ(x,y,z) = √(x²+y²).</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Convert the density function: √(x²+y²) = r. Set up: <div class="step-math">M = ∫₀^(2π)∫₀²∫₀³ r &nbsp;·&nbsp; r &nbsp;dz &nbsp;dr &nbsp;dθ</div></div> (one r from the density, one r from dV — don't forget both!)</div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Inner integral (dz), trivial since the integrand doesn't involve z: <div class="step-math">∫₀³ r² dz = 3r²</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Middle integral (dr): <div class="step-math">∫₀² 3r² dr = [r³]₀² = 8</div></div></div>
+      <div class="ex-step"><span class="step-n">4</span><div class="step-body">Outer integral (dθ): <div class="step-math">∫₀^(2π) 8 dθ = 16π</div></div></div>
+      <div class="ex-answer">M = 16π</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -1951,6 +2421,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">x²+y²=r². <span class="final">∫₀^(2π)∫₀¹∫₀⁵ r²·r dz dr dθ = ∫₀^(2π)∫₀¹∫₀⁵ r³ dz dr dθ</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Evaluate the integral you set up in Practice #2: ∫₀^(2π)∫₀²∫<sub>r</sub>² z·r dz dr dθ.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Inner (dz): ∫<sub>r</sub>² z r dz = r[z²/2]<sub>r</sub>² = r(2 − r²/2) = 2r − r³/2. Middle (dr): ∫₀²(2r−r³/2)dr = [r² − r⁴/8]₀² = 4 − 2 = 2. Outer: ∫₀^(2π)2 dθ. <span class="final">4π</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find the volume of the solid bounded above by z=√(8−x²−y²) and below by z=√(x²+y²) (above the cone, below the sphere of radius 2√2).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Curves meet where r=√(8−r²)→r²=8−r²→r=2. V=∫₀^(2π)∫₀²[√(8−r²)−r]·r dr dθ. Split: ∫r√(8−r²)dr (u=8−r²) = [−⅓(8−r²)^{3/2}]₀² = −⅓(4^{3/2})+⅓(8^{3/2})=−8/3+16√2/3. Minus ∫r²dr=[r³/3]₀²=8/3. Inner total = 16√2/3−8/3−8/3=16√2/3−16/3. Times 2π. <span class="final">V = (32π/3)(√2 − 1)</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -1963,6 +2443,12 @@
     <div class="section-eyebrow"><span class="num-badge">15.8</span> Chapter 15 · Multiple Integrals</div>
     <h1 class="page-title">Triple Integrals in Spherical Coordinates</h1>
     <p class="lede">The natural coordinate system for spheres, cones through the origin, and anything with radial symmetry in 3D.</p>
+
+    <p>Spherical coordinates locate a point by three genuinely different kinds of measurement: ρ (rho) is straight-line distance from the origin (always ≥ 0), φ (phi) is the angle measured down from the positive z-axis (ranging 0 to π — think of it like "latitude measured from the north pole" rather than from the equator), and θ is the same angle as in polar/cylindrical, measured around the z-axis. If you've ever seen a globe's latitude/longitude system, φ is closely related to latitude (just measured from the pole instead of the equator) and θ is exactly longitude.</p>
+
+    <p>The volume element dV = ρ² sinφ dρ dφ dθ is the one formula in this whole chapter most worth memorizing cold, since it's easy to lose either the ρ² or the sinφ under exam pressure. Here's the geometric reason both factors appear: imagine a tiny "box" built from a small change dρ in radius, dφ in the polar angle, and dθ in the azimuthal angle. Its three edge lengths are approximately dρ (radial), ρ dφ (an arc at radius ρ, exactly like arc length = radius × angle), and ρ sinφ dθ (an arc <em>around</em> the z-axis, but at the smaller "horizontal radius" ρ sinφ, not the full ρ — picture how much smaller a circle of latitude gets near the poles of a globe than at the equator). Multiply the three edge lengths together: dρ · (ρ dφ) · (ρ sinφ dθ) = ρ² sinφ dρ dφ dθ.</p>
+
+    <p>Since sinφ ≥ 0 for the entire valid range 0≤φ≤π, you never need absolute value bars around it — one fewer thing to worry about compared to some other volume-element derivations.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -1991,6 +2477,15 @@
       <div class="ex-answer">V = 8π/3</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Center of mass style integral (weighted average)</div>
+      <div class="ex-prompt">Find the average distance from the origin of points in the solid ball x²+y²+z² ≤ a² (i.e. find (1/Volume)∭<sub>E</sub> ρ dV).</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Set up the numerator: ρ · dV = ρ · ρ²sinφ dρdφdθ = ρ³ sinφ dρdφdθ: <div class="step-math">∭<sub>E</sub> ρ dV = ∫₀^(2π)∫₀^π∫₀ᵃ ρ³ sinφ &nbsp;dρ &nbsp;dφ &nbsp;dθ</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Separate the three factors (each integral involves only one variable): <div class="step-math">= [∫₀ᵃρ³dρ][∫₀^π sinφ dφ][∫₀^(2π)dθ] = (a⁴/4)(2)(2π) = πa⁴</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Divide by the volume of the ball, V = 4πa³/3 (from Practice #1 below): <div class="step-math">Average = πa⁴ / (4πa³/3) = 3a/4</div></div></div>
+      <div class="ex-answer">Average distance from the origin = 3a/4 (a nice, clean result — worth remembering as a check for similar problems).</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -2008,6 +2503,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer"><span class="final">V = ∫₀^(2π)∫₀^(π/4)∫₁² ρ²sinφ dρ dφ dθ</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Convert the point (x,y,z) = (0, 2, 0) to spherical coordinates.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">ρ=√(0+4+0)=2. cosφ=z/ρ=0/2=0→φ=π/2. On the xy-plane, along positive y-axis: θ=π/2. <span class="final">(ρ,θ,φ) = (2, π/2, π/2)</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find the mass of the solid hemisphere x²+y²+z²≤4, z≥0, with density δ = z.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">z=ρcosφ. M=∫₀^(2π)∫₀^(π/2)∫₀² (ρcosφ)ρ²sinφ dρdφdθ = ∫₀^(2π)dθ · ∫₀^(π/2)cosφ sinφ dφ · ∫₀²ρ³dρ = 2π · [½sin²φ]₀^(π/2) · [ρ⁴/4]₀² = 2π·(½)·(4). <span class="final">M = 4π</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -2020,6 +2525,10 @@
     <div class="section-eyebrow"><span class="num-badge">16.1</span> Chapter 16 · Vector Calculus</div>
     <h1 class="page-title">Vector Fields</h1>
     <p class="lede">A vector field assigns a vector — not a number — to every point in space: think wind velocity, gravitational pull, or fluid flow.</p>
+
+    <p>This is a genuine shift in what "function" means for the rest of the chapter. Up through Chapter 15, every function you integrated was scalar-valued (a plain number out). From here forward, F is <em>vector</em>-valued — it takes in a point and hands back an arrow, not a number. This is exactly the setup real physical fields come in: at every point in a room, the wind has both a speed and a direction; at every point near a magnet, the magnetic field has both a strength and a direction. A vector field is the mathematical object built to describe exactly that.</p>
+
+    <p>It's worth explicitly connecting this section back to 14.6: the gradient ∇f of any scalar function f is itself a vector field — at every point (x,y), ∇f(x,y) is a specific vector. This is why gradient fields get special attention here: they're the most important source of examples, and (as you'll see in 16.3) they have a uniquely nice property — line integrals through them only depend on the start and end points, not the path taken.</p>
 
     <div class="formula-box">
       <div class="flabel">Definition</div>
@@ -2041,6 +2550,14 @@
       <div class="ex-answer">F circulates counterclockwise around the origin, like a whirlpool — this is a classic non-conservative field.</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — A radially inward field</div>
+      <div class="ex-prompt">Sketch F(x,y,z) = −x i − y j − z k at a few points, and describe the pattern.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">At (1,0,0): F = ⟨−1,0,0⟩ (points back toward the origin). At (0,2,0): F = ⟨0,−2,0⟩ (also points toward the origin, and is longer since the point is farther away).</div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">In general F(x,y,z) = −⟨x,y,z⟩ = −r (the negative of the position vector), so it always points directly toward the origin, with magnitude equal to the distance from the origin.</div></div>
+      <div class="ex-answer">This field looks like everything is being pulled inward toward a central point — the same shape as a gravitational or electric attraction field. It is, in fact, conservative: it's the gradient of f(x,y,z) = −½(x²+y²+z²).</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -2058,6 +2575,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">Need f<sub>x</sub>=2x → f=x²+g(y); f<sub>y</sub>=g′(y)=2y → g=y². <span class="final">f(x,y) = x² + y² (+C)</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find the gradient field of f(x,y,z) = xyz, and evaluate it at the point (1,2,3).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">∇f = ⟨yz, xz, xy⟩. At (1,2,3): ⟨6, 3, 2⟩. <span class="final">∇f(1,2,3) = ⟨6, 3, 2⟩</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Describe the vector field F(x,y) = ⟨1, x⟩ — sketch three vectors and describe the general shape.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">At x=0: ⟨1,0⟩ (horizontal). At x=1: ⟨1,1⟩ (45°). At x=−1: ⟨1,−1⟩. Every vector has the same horizontal component (1) but a vertical component that grows with x. <span class="final">Vectors all point rightward, tilting more steeply upward as x increases — like flow lines being sheared/bent by increasing x</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -2070,6 +2597,12 @@
     <div class="section-eyebrow"><span class="num-badge">16.2</span> Chapter 16 · Vector Calculus</div>
     <h1 class="page-title">Line Integrals</h1>
     <p class="lede">Instead of integrating over an interval, we now integrate along a curve — summing up a scalar function's values, or a vector field's push, along the path.</p>
+
+    <p>Think back to how arc length worked in 13.3: L = ∫|r′(t)|dt summed up tiny bits of length along a curve. A scalar line integral ∫<sub>C</sub> f ds does almost the same thing, except now you weight each tiny bit of arc length ds by the value of f at that point before summing — so instead of just measuring total length, you're computing something like "total f-ness accumulated along the path" (mass, if f is a linear density function; total temperature experienced, if f is a temperature field, etc.).</p>
+
+    <p>The vector line integral ∫<sub>C</sub> F · dr is a different, arguably more important idea: physically, it's <strong>work</strong> — the total effort a force field F exerts on a particle as it's dragged along the path C. At each instant, only the <em>component of F pointing along the direction of motion</em> actually contributes to the work (a force pushing sideways to your direction of travel does nothing useful) — which is exactly what the dot product F·r′(t) captures, echoing the same "dot product measures alignment" idea from 12.3.</p>
+
+    <p>This is also why the two line integrals behave so differently under reversing direction: ∫<sub>C</sub> f ds (scalar) doesn't care which way you walk the curve — the arc length ds is always positive regardless of direction, so the total accumulation of f is the same either way. But ∫<sub>C</sub> F·dr (vector) flips sign if you reverse direction, because reversing r′(t) reverses the sign of every dot product F·r′(t) — walking backward through a force field does the exact opposite work.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -2099,6 +2632,15 @@
       <div class="ex-answer">∫<sub>C</sub> F · dr = 5/3</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Scalar line integral (mass of a wire)</div>
+      <div class="ex-prompt">A wire has the shape of the curve r(t) = ⟨cos t, sin t, t⟩, 0≤t≤2π, and linear density δ(x,y,z) = z. Find the total mass of the wire.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Mass is exactly the scalar line integral of density: M = ∫<sub>C</sub> δ ds. Find ds = |r′(t)|dt: <div class="step-math">r′(t) = ⟨−sin t, cos t, 1⟩, &nbsp; |r′(t)| = √(sin²t+cos²t+1) = √2</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Substitute the density (δ = z = t along this curve) and set up the integral: <div class="step-math">M = ∫₀^(2π) t &nbsp;·&nbsp; √2 &nbsp;dt</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Evaluate: <div class="step-math">M = √2 [t²/2]₀^(2π) = √2 &nbsp;(4π²/2)</div></div></div>
+      <div class="ex-answer">M = 2√2 π²</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -2116,6 +2658,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">dx=2t dt, dy=3t²dt. 2xy=2t²·t³=2t⁵, x²=t⁴. Integral: ∫₀¹[2t⁵(2t)+t⁴(3t²)]dt=∫₀¹(4t⁶+3t⁶)dt=∫₀¹7t⁶dt=1. <span class="final">1</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Evaluate ∫<sub>C</sub> F·dr where F = ⟨z, y, −x⟩ and C is the line segment from (0,0,0) to (1,1,1).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">r(t)=⟨t,t,t⟩, 0≤t≤1, r′(t)=⟨1,1,1⟩. F(r(t))=⟨t,t,−t⟩. Dot: t+t−t=t. ∫₀¹t dt. <span class="final">1/2</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find the work done by F = ⟨y, −x, 2⟩ moving a particle along r(t)=⟨cos t, sin t, t⟩, 0≤t≤2π (one full turn of a helix).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">r′(t)=⟨−sin t, cos t, 1⟩. F(r(t))=⟨sin t, −cos t, 2⟩. Dot: −sin²t−cos²t+2 = −1+2=1. ∫₀^(2π)1 dt = 2π. <span class="final">W = 2π</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -2128,6 +2680,12 @@
     <div class="section-eyebrow"><span class="num-badge">16.3</span> Chapter 16 · Vector Calculus</div>
     <h1 class="page-title">The Fundamental Theorem for Line Integrals</h1>
     <p class="lede">For a conservative field, the line integral only cares about the endpoints — the path itself is irrelevant. This is the multivariable version of the FTC.</p>
+
+    <p>Compare this theorem to the ordinary FTC from Calc I: ∫ₐᵇ f′(x)dx = f(b) − f(a) — you evaluate the antiderivative at the endpoints and subtract, completely ignoring how f′ behaved in between. The Fundamental Theorem for Line Integrals says exactly the same thing, one level up: if F happens to be a gradient field (F = ∇f), then ∫<sub>C</sub> F·dr = f(endpoint) − f(startpoint), no matter which path C takes to get from one to the other, and no matter how twisted that path is. f plays the role of "the antiderivative"; F=∇f is "the derivative."</p>
+
+    <p>Why does path-independence follow from conservativeness? Picture two different paths, C₁ and C₂, both running from point A to point B. If you traverse C₁ forward and then C₂ backward, you get a closed loop. If F is conservative, ∮ F·dr = 0 around any closed loop (this is essentially the theorem applied to a loop, where start=end so f(end)−f(start)=0). But ∮ = ∫<sub>C₁</sub> − ∫<sub>C₂</sub> (forward on one, backward — hence a sign flip — on the other), so ∫<sub>C₁</sub> = ∫<sub>C₂</sub>: the two paths must give the same value. This chain of reasoning is exactly how Stewart's text proves the equivalence of "conservative," "path-independent," and "zero circulation around every closed loop."</p>
+
+    <p>The component test (∂P/∂y = ∂Q/∂x) is the practical shortcut you'll use constantly: rather than trying to guess a potential function right away, check this equation first — if it fails, F definitely isn't conservative and you can stop; if it holds (and the domain is simply-connected, meaning it has no holes), you're guaranteed a potential function exists, and you can go find it using the systematic "integrate P, then match against Q" method shown below.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -2156,6 +2714,15 @@
       <div class="ex-answer">f(x,y) = x²y + y³; ∫<sub>C</sub> F·dr = 10</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Finding a potential function in 3D</div>
+      <div class="ex-prompt">Show F(x,y,z) = ⟨yz, xz, xy⟩ is conservative and find a potential function f.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Integrate P = yz with respect to x (treating y,z as constant): <div class="step-math">f = ∫ yz &nbsp;dx = xyz + g(y,z)</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Differentiate this f with respect to y and match to Q = xz: <div class="step-math">f<sub>y</sub> = xz + g<sub>y</sub>(y,z) = xz &nbsp;⟹&nbsp; g<sub>y</sub> = 0 &nbsp;⟹&nbsp; g(y,z) = h(z)</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Differentiate f = xyz + h(z) with respect to z and match to R = xy: <div class="step-math">f<sub>z</sub> = xy + h′(z) = xy &nbsp;⟹&nbsp; h′(z) = 0 &nbsp;⟹&nbsp; h(z) = C</div></div></div>
+      <div class="ex-answer">f(x,y,z) = xyz (+C) — and since we found a valid potential function, F is indeed conservative (this is really the same "guess, then confirm by differentiating back" logic as 2D, just with one more variable to track).</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -2173,6 +2740,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">∂P/∂y=1, ∂Q/∂x=−1. Not equal. <span class="final">Not conservative</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Show F(x,y) = ⟨2xe<sup>y</sup>, x²e<sup>y</sup>+1⟩ is conservative, find f, and evaluate ∮<sub>C</sub>F·dr for any closed curve C.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">∂P/∂y=2xe<sup>y</sup>, ∂Q/∂x=2xe<sup>y</sup> ✓. f=∫2xe<sup>y</sup>dx=x²e<sup>y</sup>+g(y). f<sub>y</sub>=x²e<sup>y</sup>+g′(y)=x²e<sup>y</sup>+1⟹g=y. f=x²e<sup>y</sup>+y. Since C is closed, start=end, so f(end)−f(start)=0. <span class="final">f(x,y)=x²e<sup>y</sup>+y; ∮<sub>C</sub>F·dr = 0 for any closed curve</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find a potential function for F(x,y,z) = ⟨2x, 2y, 4z³⟩, then evaluate ∫<sub>C</sub>F·dr from (0,0,0) to (1,1,1).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">f=x²+y²+z⁴ (each term integrates independently since there's no cross-dependence). f(1,1,1)=1+1+1=3, f(0,0,0)=0. <span class="final">f(x,y,z)=x²+y²+z⁴; ∫<sub>C</sub>F·dr = 3</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -2185,6 +2762,10 @@
     <div class="section-eyebrow"><span class="num-badge">16.4</span> Chapter 16 · Vector Calculus</div>
     <h1 class="page-title">Green's Theorem</h1>
     <p class="lede">The first of three "big theorem" upgrades: it converts a line integral around a closed curve into a double integral over the region it encloses.</p>
+
+    <p>Green's Theorem is the two-dimensional ancestor of both Stokes' Theorem (16.8) and the Divergence Theorem (16.9) — genuinely understanding it now will make those two much easier later, since they're built on the exact same idea, just lifted into three dimensions. The theorem trades a 1D integral (around the boundary curve C) for a 2D integral (over the whole enclosed region D) — and the quantity ∂Q/∂x − ∂P/∂y that shows up inside the double integral is precisely the 2D version of "curl," measuring the field's local rotation at each point of D. Loosely: Green's Theorem says "total rotation around the outside boundary equals the sum of all the tiny local rotations happening throughout the interior" — the little rotations in adjacent interior cells cancel each other out except right along the boundary.</p>
+
+    <p><strong>Positive orientation</strong> means C is traversed so that D is always on your left as you walk along it — for a simple closed curve like a circle or a simple polygon, this just means counterclockwise. If a problem gives you a clockwise curve, either negate your final answer or explicitly reverse the curve's direction before applying the theorem.</p>
 
     <div class="formula-box">
       <div class="flabel">Green's Theorem</div>
@@ -2213,6 +2794,15 @@
       <div class="ex-answer">∮<sub>C</sub> y²dx + 3xy dy = 16/3</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Green's Theorem for a piecewise boundary</div>
+      <div class="ex-prompt">Use Green's Theorem to evaluate ∮<sub>C</sub> (x²−y) dx + (x+y²) dy, where C is the boundary (counterclockwise) of the triangle with vertices (0,0), (1,0), (0,1).</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">The boundary is three separate line segments — computing three individual line integrals directly would be tedious. Instead, identify P = x²−y, Q = x+y²: <div class="step-math">∂Q/∂x = 1, &nbsp; ∂P/∂y = −1 &nbsp;⟹&nbsp; ∂Q/∂x − ∂P/∂y = 2</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Set up the double integral over the triangle D: 0≤x≤1, 0≤y≤1−x: <div class="step-math">∬<sub>D</sub> 2 &nbsp;dA = 2 · (Area of D)</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">The triangle has legs of length 1, so its area is ½: <div class="step-math">∮<sub>C</sub>F·dr = 2 · (1/2)</div></div></div>
+      <div class="ex-answer">∮<sub>C</sub> (x²−y)dx + (x+y²)dy = 1 — notice how much faster this was than parametrizing and integrating three separate segments.</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -2230,6 +2820,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">∂Q/∂x=7, ∂P/∂y=3, difference=4 (the messy terms vanish under differentiation!). ∬<sub>D</sub>4 dA = 4·(area of unit disk) = 4π. <span class="final">4π</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Use Green's Theorem to evaluate ∮<sub>C</sub> (2x³−y³)dx + (x³+y³)dy, C the circle x²+y²=1 counterclockwise.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">∂Q/∂x=3x², ∂P/∂y=−3y². Difference=3x²+3y²=3(x²+y²). In polar: 3r². ∬<sub>D</sub>3r² dA = ∫₀^(2π)∫₀¹3r²·r dr dθ = 2π·3·[r⁴/4]₀¹ = 2π(3/4). <span class="final">3π/2</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find the area of the region bounded by the astroid x=cos³t, y=sin³t, 0≤t≤2π, using ½∮(x dy − y dx).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">dx=−3cos²t sin t dt, dy=3sin²t cos t dt. x dy − y dx = 3cos³t sin²t cos t dt + 3sin³t cos²t sin t dt = 3cos⁴t sin²t dt + 3sin⁴t cos²t dt = 3sin²t cos²t(cos²t+sin²t) dt = 3sin²t cos²t dt. A=½∫₀^(2π)3sin²t cos²t dt = (3/2)∫₀^(2π)¼sin²(2t) dt = (3/8)∫₀^(2π)½(1−cos4t)dt = (3/16)(2π). <span class="final">A = 3π/8</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -2242,6 +2842,12 @@
     <div class="section-eyebrow"><span class="num-badge">16.5</span> Chapter 16 · Vector Calculus</div>
     <h1 class="page-title">Curl and Divergence</h1>
     <p class="lede">Two operations on a vector field that summarize how it's spinning (curl) and how it's spreading out (divergence) — both built from ∇, the "del" operator.</p>
+
+    <p>The notational trick of writing curl F as ∇ × F and div F as ∇ · F is more than cute shorthand — it's genuinely useful for remembering which operation produces what kind of output. ∇ behaves formally like a vector ⟨∂/∂x, ∂/∂y, ∂/∂z⟩ of "operators" instead of numbers. Crossing it with a vector field F (via the same determinant recipe from 12.4) produces another vector — that's curl. Dotting it with F (component-by-component multiply-and-add, just like 12.3) produces a scalar — that's divergence. Same mnemonic as "dot → number, cross → vector" from Chapter 12, just now with derivatives mixed in.</p>
+
+    <p><strong>Physical meaning matters here, not just the formula.</strong> If F represents the velocity field of a fluid, curl F at a point tells you the axis and speed a tiny paddle wheel placed there would spin around — curl F = 0 means the fluid has no local rotation anywhere (it might still be moving, just without swirling). div F at a point tells you whether fluid is being created (source, div F &gt; 0) or destroyed (sink, div F &lt; 0) right there, or whether it's simply flowing through without accumulating (div F = 0, called <em class="term">incompressible</em>).</p>
+
+    <p>The two identities div(curl F) = 0 and curl(∇f) = 0 are worth internalizing rather than just memorizing, because they come up constantly as sanity checks: if you're told a field is a gradient field and you compute a nonzero curl, you've made an arithmetic mistake somewhere; if you're asked whether some vector field G could be the curl of another field and div G ≠ 0, the answer is immediately "no," without any further work.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -2275,6 +2881,15 @@
       <div class="ex-answer">curl F = ⟨−y, −z, −x⟩; &nbsp; div F = x + y + z</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Verifying the identity div(curl F) = 0</div>
+      <div class="ex-prompt">For F = ⟨x²y, y²z, z²x⟩, compute curl F, then confirm div(curl F) = 0.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Identify P=x²y, Q=y²z, R=z²x. Curl's components: <div class="step-math">i: R<sub>y</sub>−Q<sub>z</sub> = 0 − y² = −y² &nbsp;&nbsp; j: −(R<sub>x</sub>−P<sub>z</sub>) = −(z² − 0) = −z² &nbsp;&nbsp; k: Q<sub>x</sub>−P<sub>y</sub> = 0 − x² = −x²</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">So curl F = ⟨−y², −z², −x²⟩. Now take the divergence of this new vector field: <div class="step-math">div(curl F) = ∂(−y²)/∂x + ∂(−z²)/∂y + ∂(−x²)/∂z</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Each of these three partials is zero, since none of the three components actually depends on the variable being differentiated: <div class="step-math">= 0 + 0 + 0</div></div></div>
+      <div class="ex-answer">div(curl F) = 0 ✓ — confirming the general identity, not just for this specific F.</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -2292,6 +2907,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">curl: i: (1−1)=0, j: −(0−0)=0, k: (1−1)=0. So conservative. f<sub>x</sub>=y→f=xy+g(y,z); f<sub>y</sub>=x+g<sub>y</sub>=x+z→g<sub>y</sub>=z→g=yz+h(z); f<sub>z</sub>=y+h′(z)=y→h′=0. <span class="final">curl F = 0; f(x,y,z) = xy + yz</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Determine whether the fluid velocity field F = ⟨−y, x, 0⟩ is incompressible (div F = 0), and describe whether it has any rotation.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">div F = 0+0+0=0, so yes, incompressible. curl F: i:(0−0)=0, j:−(0−0)=0, k:(1−(−1))=2. curl F=⟨0,0,2⟩≠0. <span class="final">Incompressible (div F=0), but rotational (curl F=⟨0,0,2⟩≠0) — this is the same whirlpool field from 16.1</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> For f(x,y,z) = x²+y²+z², compute ∇f, then confirm curl(∇f) = 0 directly.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">∇f=⟨2x,2y,2z⟩. curl: i:(∂(2z)/∂y − ∂(2y)/∂z)=(0−0)=0, j:−(∂(2z)/∂x−∂(2x)/∂z)=−(0−0)=0, k:(∂(2y)/∂x−∂(2x)/∂y)=(0−0)=0. <span class="final">curl(∇f) = ⟨0,0,0⟩ ✓</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -2304,6 +2929,12 @@
     <div class="section-eyebrow"><span class="num-badge">16.6</span> Chapter 16 · Vector Calculus</div>
     <h1 class="page-title">Parametric Surfaces and Their Areas</h1>
     <p class="lede">Just as r(t) traces a curve with one parameter, r(u,v) sweeps out a whole surface with two parameters — setting up everything section 16.7 needs.</p>
+
+    <p>This is exactly the same conceptual jump as going from a single-variable function to a two-variable function back in 14.1, applied to vector functions instead of scalar ones: r(t) (one input, Chapter 13) traces a 1-dimensional object (a curve); r(u,v) (two inputs) traces a 2-dimensional object (a surface) sitting inside 3D space. Each pair (u,v) in some parameter domain D gets mapped to a specific point r(u,v) in space, and as (u,v) ranges over all of D, those points sweep out the whole surface.</p>
+
+    <p>The normal vector r<sub>u</sub> × r<sub>v</sub> deserves the same geometric picture you built for the cross product back in 12.4: r<sub>u</sub> is tangent to the surface in the "u-direction" (holding v fixed and varying u slightly), r<sub>v</sub> is tangent in the "v-direction," and any two tangent vectors at a point on a surface span the entire tangent plane there — so their cross product, being perpendicular to both, must be perpendicular to the whole surface. This is exactly the surface-analogue of how ∇F gave a normal vector to a level surface back in 14.6, and both facts get used side by side throughout the rest of this chapter.</p>
+
+    <p>The surface area formula A(S) = ∬<sub>D</sub>|r<sub>u</sub>×r<sub>v</sub>|dA is built the same way arc length was in 13.3: |r<sub>u</sub>×r<sub>v</sub>| measures how much a tiny rectangle in the (u,v) parameter domain gets "stretched" into a tiny patch of actual surface area — integrating that stretching factor over the whole parameter domain totals up the true surface area, exactly like |r′(t)| measured stretching for arc length.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -2331,6 +2962,16 @@
       <div class="ex-answer">A(S) = 2√14</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Surface area of a sphere (checking against the known formula)</div>
+      <div class="ex-prompt">Use the parametrization r(φ,θ) = ⟨a sinφ cosθ, a sinφ sinθ, a cosφ⟩ to find the surface area of a sphere of radius a.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Find the tangent vectors: <div class="step-math">r<sub>φ</sub> = ⟨a cosφ cosθ, a cosφ sinθ, −a sinφ⟩ &nbsp;&nbsp; r<sub>θ</sub> = ⟨−a sinφ sinθ, a sinφ cosθ, 0⟩</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Cross product (after simplifying using sin²+cos²=1 repeatedly — this is a standard but somewhat lengthy computation from the textbook): <div class="step-math">r<sub>φ</sub> × r<sub>θ</sub> = a² sinφ ⟨sinφ cosθ, sinφ sinθ, cosφ⟩ = a²sinφ &nbsp;r̂</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Since r̂ (the unit radial vector) has length 1: <div class="step-math">|r<sub>φ</sub> × r<sub>θ</sub>| = a² sinφ</div> (sinφ ≥ 0 for 0≤φ≤π, so no absolute value needed)</div></div>
+      <div class="ex-step"><span class="step-n">4</span><div class="step-body">Integrate over the full parameter domain 0≤φ≤π, 0≤θ≤2π: <div class="step-math">A = ∫₀^(2π)∫₀^π a²sinφ &nbsp;dφ &nbsp;dθ = a²(2)(2π)</div></div></div>
+      <div class="ex-answer">A = 4πa² — matching the familiar sphere surface area formula, exactly as this parametrization should give.</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -2348,6 +2989,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer"><span class="final">r(θ,z) = ⟨3cosθ, 3sinθ, z⟩, 0≤θ≤2π, 0≤z≤5</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Find the surface area of the portion of the cone z=√(x²+y²) between z=1 and z=3.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">f(x,y)=√(x²+y²), f<sub>x</sub>=x/√(x²+y²), f<sub>y</sub>=y/√(x²+y²). f<sub>x</sub>²+f<sub>y</sub>²=1, so √(...+1)=√2. Region D (projection) is the annulus 1≤r≤3. A=√2·(area of annulus)=√2·π(9−1)=8√2π. <span class="final">A = 8√2 π</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Find r<sub>u</sub> × r<sub>v</sub> for the plane parametrization r(u,v) = r₀ + u a + v b (a general plane through r₀ spanned by vectors a and b), and explain why the result makes sense.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">r<sub>u</sub>=a, r<sub>v</sub>=b (constant vectors, since r is linear in u,v). <span class="final">r<sub>u</sub>×r<sub>v</sub> = a×b — the same normal vector formula from 12.5, since a flat parametrized plane should reduce back to the earlier plane-normal formula</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -2360,6 +3011,12 @@
     <div class="section-eyebrow"><span class="num-badge">16.7</span> Chapter 16 · Vector Calculus</div>
     <h1 class="page-title">Surface Integrals</h1>
     <p class="lede">The surface version of a line integral: integrate a scalar function, or the flux of a vector field, across a surface instead of along a curve.</p>
+
+    <p>Track the pattern across the whole chapter: line integral of a scalar function (16.2) integrated f against arc length ds; surface integral of a scalar function does the same thing one dimension up, integrating f against surface area dS. Line integral of a vector field (16.2) dotted F against the tangent direction r′(t)dt to measure "push along the curve"; surface integral of a vector field (this section) dots F against the <em>normal</em> direction (r<sub>u</sub>×r<sub>v</sub>)dA to measure "push <em>through</em> the surface" — this is exactly what <em class="term">flux</em> means physically: how much of a fluid (or field) is passing through S per unit time.</p>
+
+    <p>Orientation matters here in a way it didn't for scalar surface integrals: a surface has two sides (think of the two faces of a sheet of paper), and F·dS measures flux through the surface in the direction of whichever normal you chose. Flip the chosen normal and the flux integral simply changes sign — same idea as reversing a curve's direction in a line integral. For a closed surface (fully enclosing a solid, like a sphere or a cube's boundary), the standard convention — used throughout section 16.9 — is to orient it with the normal pointing <strong>outward</strong>.</p>
+
+    <p>The "graph" formula (∬<sub>D</sub>(−Pg<sub>x</sub>−Qg<sub>y</sub>+R)dA) looks like it comes out of nowhere, but it's really just F·(r<sub>u</sub>×r<sub>v</sub>) worked out explicitly for the natural parametrization r(x,y)=⟨x,y,g(x,y)⟩: computing r<sub>x</sub>×r<sub>y</sub> for this particular r always gives ⟨−g<sub>x</sub>, −g<sub>y</sub>, 1⟩ (pointing generally upward, hence "oriented upward"), and dotting F=⟨P,Q,R⟩ against that vector produces exactly −Pg<sub>x</sub>−Qg<sub>y</sub>+R.</p>
 
     <div class="formula-grid">
       <div class="formula-box">
@@ -2389,6 +3046,15 @@
       <div class="ex-answer">∬<sub>S</sub> F · dS = π/2</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Flux through a piece of a sphere</div>
+      <div class="ex-prompt">Find ∬<sub>S</sub> F · dS for F = ⟨x, y, z⟩, S the sphere x²+y²+z²=a², oriented outward. (Use the parametrization from 16.6's Example 2: r<sub>φ</sub>×r<sub>θ</sub> = a²sinφ &nbsp;r̂, and note F on the sphere is exactly a &nbsp;r̂.)</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">On the sphere of radius a, the position vector r itself has length a, and F = r (since F=⟨x,y,z⟩ is literally the position vector). So F = a &nbsp;r̂ where r̂ is the outward unit normal.</div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Dot F with the normal vector r<sub>φ</sub>×r<sub>θ</sub> = a²sinφ &nbsp;r̂ found in 16.6: <div class="step-math">F · (r<sub>φ</sub>×r<sub>θ</sub>) = (a &nbsp;r̂) · (a²sinφ &nbsp;r̂) = a³sinφ &nbsp;(r̂·r̂) = a³sinφ</div></div> (since r̂ is a unit vector, r̂·r̂=1)</div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Integrate over the full parameter domain: <div class="step-math">∬<sub>S</sub>F·dS = ∫₀^(2π)∫₀^π a³ sinφ &nbsp;dφ &nbsp;dθ = a³(2)(2π)</div></div></div>
+      <div class="ex-answer">∬<sub>S</sub> F · dS = 4πa³ — this specific result (flux of the position field through a sphere) reappears as a benchmark check in section 16.9.</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -2406,6 +3072,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">g<sub>x</sub>=1,g<sub>y</sub>=1. √(1+1+1)=√3. Mass=∬<sub>S</sub>1 dS=√3·(area of D=1). <span class="final">√3</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Finish evaluating Practice #2: ∬<sub>D</sub>(x²+y²+4)dA, D: x²+y²≤4.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">Polar: ∫₀^(2π)∫₀²(r²+4)r dr dθ = 2π∫₀²(r³+4r)dr = 2π[r⁴/4+2r²]₀² = 2π(4+8). <span class="final">24π</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Evaluate ∬<sub>S</sub> z² dS, S the cylinder x²+y²=1, 0≤z≤2 (using the parametrization r(θ,z)=⟨cosθ,sinθ,z⟩).</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">r<sub>θ</sub>=⟨−sinθ,cosθ,0⟩, r<sub>z</sub>=⟨0,0,1⟩. Cross: i:(cosθ·1−0·0)=cosθ, j:−(−sinθ·1−0·0)=sinθ, k:0. |r<sub>θ</sub>×r<sub>z</sub>|=√(cos²θ+sin²θ)=1. ∬z²dS=∫₀^(2π)∫₀²z²·1 dz dθ = 2π·(8/3). <span class="final">16π/3</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -2418,6 +3094,12 @@
     <div class="section-eyebrow"><span class="num-badge">16.8</span> Chapter 16 · Vector Calculus</div>
     <h1 class="page-title">Stokes' Theorem</h1>
     <p class="lede">Green's Theorem, lifted into 3D: it relates a line integral around the boundary of a surface to a surface integral of the curl over that surface.</p>
+
+    <p>Revisit the "Green's Theorem is total rotation" intuition from 16.4: ∮<sub>C</sub> F·dr around a flat boundary equaled ∬<sub>D</sub> (the local 2D rotation, ∂Q/∂x−∂P/∂y) summed over the interior. Stokes' Theorem says exactly the same thing for a <em>curved, tilted</em> surface hanging in 3D space instead of a flat region: curl F is precisely the 3D generalization of that "local rotation" quantity (in fact, curl F · n, where n is the surface's normal, reduces exactly to ∂Q/∂x−∂P/∂y when the surface happens to be flat in the xy-plane — this is literally how you can derive Green's Theorem as a special case of Stokes').</p>
+
+    <p>The orientation rule ("walk along C with your head pointing along the surface's chosen normal, and S stays on your left") is the 3D version of "counterclockwise" from Green's Theorem — it's often called the <em class="term">right-hand rule for surfaces</em>: curl the fingers of your right hand in the direction C is traversed, and your thumb points in the direction the surface's normal must be chosen to match. Getting this orientation backward flips the sign of your final answer, so it's worth double-checking on any problem.</p>
+
+    <p>The most practically useful consequence of Stokes' Theorem is that ∬<sub>S</sub> curl F · dS depends <em>only on the boundary curve C</em>, not on which specific surface S you chose to fill it in with — so if computing the flux over one surface looks hard, you're free to swap in any other surface with the exact same boundary, as long as it's easier to work with (a flat disk is almost always the easiest choice when the boundary is a simple closed curve like a circle).</p>
 
     <div class="formula-box">
       <div class="flabel">Stokes' Theorem</div>
@@ -2439,6 +3121,16 @@
       <div class="ex-answer">∮<sub>C</sub> F · dr = 2π</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — Choosing an easier surface</div>
+      <div class="ex-prompt">Evaluate ∮<sub>C</sub> F · dr for F = ⟨−y², x, z²⟩, where C is the boundary of the part of the paraboloid z=5−x²−y² that lies above z=1, oriented counterclockwise when viewed from above.</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">The boundary curve C is where the paraboloid meets z=1: 1=5−x²−y² ⟹ x²+y²=4 — a circle of radius 2 at height z=1. Rather than integrate curl F over the curved paraboloid, use Stokes' Theorem's freedom to pick <em>any</em> surface with this same boundary — the flat disk D: x²+y²≤4 at z=1 is far easier.</div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">Find curl F. P=−y², Q=x, R=z²: <div class="step-math">i: (0−0)=0 &nbsp; j: −(0−0)=0 &nbsp; k: (1−(−2y)) = 1+2y</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">On the flat disk, the normal is straight up (k-direction), so only curl F's k-component contributes: <div class="step-math">∬<sub>D</sub>(1+2y) dA</div></div></div>
+      <div class="ex-step"><span class="step-n">4</span><div class="step-body">Split into two pieces. The "1" piece gives the area of D: π(2²)=4π. The "2y" piece integrates to 0 by symmetry (y is an odd function over a disk centered at the origin): <div class="step-math">∬<sub>D</sub>1 dA + ∬<sub>D</sub>2y dA = 4π + 0</div></div></div>
+      <div class="ex-answer">∮<sub>C</sub> F · dr = 4π (computed using the flat disk instead of the curved paraboloid — exactly the shortcut Stokes' Theorem is built for)</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -2456,6 +3148,16 @@
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer"><span class="final">When S is a flat region D in the xy-plane with upward normal k, curl F · k reduces exactly to ∂Q/∂x − ∂P/∂y, turning Stokes' statement into Green's Theorem.</span></div>
       </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Use Stokes' Theorem to evaluate ∮<sub>C</sub>F·dr for F=⟨z², x², y²⟩, C the boundary of the triangle with vertices (1,0,0),(0,1,0),(0,0,1), oriented counterclockwise viewed from the origin's side.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">curl F: i:(2y−0)=2y, j:−(0−2z)=2z, k:(2x−0)=2x. curl F=⟨2y,2z,2x⟩. The triangle lies in the plane x+y+z=1, with (unnormalized) normal ⟨1,1,1⟩ (matching the given orientation). Use the flat triangular disk directly: ∬curl F · n̂ dS is equivalent to using the plane's normal ⟨1,1,1⟩ un-normalized combined with dA in xy: curl F·⟨1,1,1⟩=2y+2z+2x=2(x+y+z)=2(1)=2 on the surface (since z=1−x−y there and x+y+z=1 identically on the plane). Projected triangle in xy has area 1/2. <span class="final">∮<sub>C</sub>F·dr = 2 × (1/2) = 1</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> If curl F = 0 everywhere, what does Stokes' Theorem say about ∮<sub>C</sub>F·dr for any closed curve C?</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">∬<sub>S</sub>curl F·dS = ∬<sub>S</sub>0·dS = 0 for any surface S bounded by C. <span class="final">∮<sub>C</sub>F·dr = 0 for every closed curve — this is exactly the "conservative field" characterization from 16.3, now derived from Stokes' Theorem</span></div>
+      </div>
     </div>
 
     <div class="page-footer-nav">
@@ -2468,6 +3170,12 @@
     <div class="section-eyebrow"><span class="num-badge">16.9</span> Chapter 16 · Vector Calculus</div>
     <h1 class="page-title">The Divergence Theorem</h1>
     <p class="lede">The last of the big three: it converts a flux integral over a closed surface into a triple integral of divergence over the solid it encloses — the 3D sibling of Green's Theorem.</p>
+
+    <p>Line up all three big theorems side by side and the pattern becomes obvious: Green's Theorem relates a boundary (a closed curve C) to its interior (a flat region D), via ∂Q/∂x−∂P/∂y. Stokes' Theorem relates a boundary (a closed curve C) to a surface it bounds, via curl F. The Divergence Theorem relates a boundary (a closed <em>surface</em> S) to the solid it encloses, via div F. Each theorem is the same fundamental idea — "the total flow/rotation across a boundary equals the sum of all the tiny local flow/rotation happening throughout the interior" — applied one dimension higher than the last.</p>
+
+    <p>Physically: if F is the velocity field of a fluid, div F at a point measures the local rate at which fluid is expanding (being created) or compressing (being destroyed) right there. The Divergence Theorem says the total flux out through a closed surface S — how much fluid is net leaving the enclosed region per unit time — must exactly equal the sum of all that local expansion happening throughout the interior. If nothing inside is being created or destroyed (div F = 0 everywhere, an incompressible fluid), then whatever flows in must flow back out, and net flux through any closed surface is automatically zero — no computation needed.</p>
+
+    <p>Practically, this theorem is often the fastest tool in the entire chapter for evaluating a flux integral, especially when S is made of multiple pieces (like a cylinder's lateral surface plus its top and bottom caps) — instead of computing three separate surface integrals with three different parametrizations and normals, you convert the whole problem into a single triple integral of div F, which is frequently much simpler algebraically.</p>
 
     <div class="formula-box">
       <div class="flabel">The Divergence Theorem</div>
@@ -2490,6 +3198,15 @@
       <div class="ex-answer">∬<sub>S</sub> F · dS = 384π/5</div>
     </div>
 
+    <div class="example">
+      <div class="ex-label">Worked Example 2 — A surface made of multiple pieces</div>
+      <div class="ex-prompt">Use the Divergence Theorem to find the flux of F = ⟨x, y, z⟩ outward through S, the closed surface of the solid cylinder x²+y²≤4, 0≤z≤3 (this surface has three pieces: the lateral wall, the top disk, and the bottom disk — computing each separately would take three setups).</div>
+      <div class="ex-step"><span class="step-n">1</span><div class="step-body">Find div F: <div class="step-math">div F = 1 + 1 + 1 = 3</div></div></div>
+      <div class="ex-step"><span class="step-n">2</span><div class="step-body">By the Divergence Theorem, skip the surface entirely and integrate the constant 3 over the solid E (the cylinder): <div class="step-math">∬<sub>S</sub>F·dS = ∭<sub>E</sub> 3 &nbsp;dV = 3 · Volume(E)</div></div></div>
+      <div class="ex-step"><span class="step-n">3</span><div class="step-body">Volume of the cylinder (radius 2, height 3): <div class="step-math">V = π(2²)(3) = 12π</div></div></div>
+      <div class="ex-answer">∬<sub>S</sub> F · dS = 3(12π) = 36π — computed with a single, trivial triple integral instead of three separate surface integrals.</div>
+    </div>
+
     <h3 class="subhead">Practice</h3>
     <div class="practice-block">
       <div class="practice-item">
@@ -2506,6 +3223,16 @@
         <div class="practice-q"><span class="qn">3.</span> Use the Divergence Theorem to evaluate ∬<sub>S</sub> F·dS, F=⟨x²,y²,z²⟩, S the boundary of the solid cylinder x²+y²≤1, 0≤z≤2.</div>
         <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
         <div class="practice-answer">div F=2x+2y+2z. In cylindrical: ∫₀^(2π)∫₀¹∫₀²(2r cosθ+2r sinθ+2z)·r dz dr dθ. The cosθ,sinθ terms integrate to 0 over θ; only the 2z term survives: ∫₀^(2π)∫₀¹∫₀² 2zr dz dr dθ = (2π)(∫₀¹r dr)(∫₀²2z dz)=(2π)(1/2)(4). <span class="final">4π</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">4.</span> Verify that div F = 0 for F = curl G, where G = ⟨y, −x, 0⟩ (using the identity div(curl G)=0), and explain what this predicts about flux through any closed surface.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">curl G: i:(0−0)=0, j:−(0−0)=0, k:(−1−1)=−2. F=curl G=⟨0,0,−2⟩. div F = 0+0+0=0. <span class="final">div F = 0 (consistent with the identity); by the Divergence Theorem, ∬<sub>S</sub>F·dS = ∭0 dV = 0 for every closed surface S, regardless of its shape</span></div>
+      </div>
+      <div class="practice-item">
+        <div class="practice-q"><span class="qn">5.</span> Use the Divergence Theorem to find the outward flux of F=⟨x³,y³,z³⟩ through the sphere x²+y²+z²=1.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Show solution</button>
+        <div class="practice-answer">div F=3x²+3y²+3z²=3ρ². ∭<sub>E</sub>3ρ² dV=∫₀^(2π)∫₀^π∫₀¹3ρ²·ρ²sinφ dρdφdθ = 3(2π)(2)∫₀¹ρ⁴dρ=12π(1/5). <span class="final">12π/5</span></div>
       </div>
     </div>
 
